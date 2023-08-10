@@ -32,7 +32,7 @@ class _LoadDasboardState extends State<LoadDasboard> {
         child: Center(
           child: SpinKitWaveSpinner(
             color: Colors.white,
-            size: 50.sp,
+            size: 45.sp,
           ),
         ),
       ),

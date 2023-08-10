@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
+import '../Constant/Themes.dart';
 import 'InbuiltScreens/history.dart';
 import 'InbuiltScreens/home.dart';
 import 'InbuiltScreens/settings.dart';
@@ -32,7 +33,7 @@ class _DashBoardscreeenState extends State<DashBoardscreeen> {
         backgroundColor: backgroundColor,
         leadingWidth: double.infinity,
         leading: Padding(
-          padding: EdgeInsets.only(left: 2.w,right: 2.w),
+          padding: EdgeInsets.only(left: 2.w, right: 2.w),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -41,13 +42,14 @@ class _DashBoardscreeenState extends State<DashBoardscreeen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Welcome ",
-                        style: TextStyle(
-                            fontSize: 15.sp,
-                            color: Color.fromARGB(255, 221, 221, 221))),
+                        style: textStyle.copyWith(
+                            color: Colors.white, fontSize: 15.sp)),
                     Text(
                       "Welcome",
-                      style: TextStyle(
-                          fontSize: 16.sp, fontWeight: FontWeight.w600),
+                      style: textStyle.copyWith(
+                        color: Colors.white,
+                        fontSize: 17.sp,
+                      ),
                     )
                   ]),
               CircleAvatar(

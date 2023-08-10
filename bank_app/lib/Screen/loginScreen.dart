@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../Animations/loadtoDashboard.dart';
+import '../Constant/Themes.dart';
 
 class Login_Page extends StatefulWidget {
   Login_Page({super.key});
@@ -29,7 +30,7 @@ class _Login_PageState extends State<Login_Page> {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
             elevation: 0,
-            backgroundColor: Color.fromRGBO(101, 0, 56, 1.0),
+            backgroundColor: backgroundColor,
             leadingWidth: double.infinity,
             leading: Align(
               alignment: Alignment.centerLeft,
@@ -37,10 +38,9 @@ class _Login_PageState extends State<Login_Page> {
                 padding: EdgeInsets.only(left: 20.sp),
                 child: Text(
                   'Welcome ',
-                  style: TextStyle(
-                      fontSize: 25.sp,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: fontFamily),
+                  style: textStyle.copyWith(
+                    color: Colors.white,
+                  ),
                 ),
               ),
             )),
@@ -62,7 +62,6 @@ class _Login_PageState extends State<Login_Page> {
                 ],
               ),
               SizedBox(
-                  // height: double.infinity,
                   width: double.infinity,
                   child: Column(
                     children: [
@@ -78,11 +77,7 @@ class _Login_PageState extends State<Login_Page> {
                                   height: 5.h,
                                 ),
                                 Text('Login',
-                                    style: TextStyle(
-                                        fontSize: 30.sp,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: fontFamily)),
+                                    style: textStyle.copyWith(fontSize: 30.sp,color: Colors.white)),
                                 SizedBox(
                                   height: 6.h,
                                 ),
@@ -100,6 +95,7 @@ class _Login_PageState extends State<Login_Page> {
                                         },
                                         keyboardType: TextInputType.number,
                                         decoration: InputDecoration(
+                                          errorStyle: TextStyle(color: Colors.white),
                                             focusColor: Colors.white,
                                             hintText: " Phone number",
                                             hintStyle:
@@ -122,6 +118,8 @@ class _Login_PageState extends State<Login_Page> {
                                         },
                                         style: TextStyle(color: Colors.white),
                                         decoration: InputDecoration(
+                                          
+                                          errorStyle: TextStyle(color: Colors.white),
                                             hintText: "Password",
                                             hintStyle:
                                                 TextStyle(color: Colors.grey),
@@ -209,11 +207,7 @@ class _Login_PageState extends State<Login_Page> {
                 }
               },
               child: Text('Login',
-                  style: TextStyle(
-                      color: Color.fromRGBO(101, 0, 56, 1.0),
-                      fontSize: 16.sp,
-                      fontFamily: fontFamily,
-                      fontWeight: FontWeight.bold)),
+                  style: textStyle.copyWith(fontSize: 16.sp)),
               backgroundColor: Colors.white,
             ),
           ),

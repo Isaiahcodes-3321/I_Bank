@@ -5,6 +5,9 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_picker_platform_interface/image_picker_platform_interface.dart';
 
+import '../../Constant/Themes.dart';
+import '../../Constant/reUsedTextField.dart';
+
 class SettingTab extends StatefulWidget {
   SettingTab({super.key});
 
@@ -13,25 +16,6 @@ class SettingTab extends StatefulWidget {
 }
 
 class _SettingTabState extends State<SettingTab> {
-  var backgroundColor = Color.fromRGBO(101, 0, 56, 1.0);
-  var fontFamily = 'Rubik-VariableFont_wght';
-  var buttonPadding =
-      EdgeInsets.only(bottom: 1.h, top: 1.h, left: 4.w, right: 4.w);
-
-  TextStyle getButtonStyle() {
-    return TextStyle(
-      fontFamily: fontFamily,
-      color: Colors.white,
-      fontWeight: FontWeight.w700,
-      fontSize: 18.sp,
-    );
-  }
-
-  var outlineInputBorder = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(20.sp),
-      borderSide:
-          BorderSide(color: Color.fromRGBO(101, 0, 56, 1.0), width: 1.w));
-
   final ImagePicker picker = ImagePicker();
   XFile? image;
 
@@ -65,15 +49,15 @@ class _SettingTabState extends State<SettingTab> {
                                         onTap: () {},
                                         child: Text(
                                           'Reset Profile',
-                                          style: TextStyle(
-                                              fontFamily: fontFamily,
-                                              fontWeight: FontWeight.w600),
+                                          style: textStyle.copyWith(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 5.w),
                                         )))
                               ]),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.all(15.sp),
+                    padding: EdgeInsets.only(right: 6.w, left: 6.w, top: 2.h),
                     child: SizedBox(
                       width: double.infinity,
                       child: Column(
@@ -111,7 +95,9 @@ class _SettingTabState extends State<SettingTab> {
                               ),
                               child: Padding(
                                 padding: buttonPadding,
-                                child: Text('Select', style: getButtonStyle()),
+                                child: Text('Select',
+                                    style: textStyle.copyWith(
+                                        fontSize: 18.sp, color: Colors.white)),
                               ),
                             ),
                             SizedBox(
@@ -120,13 +106,12 @@ class _SettingTabState extends State<SettingTab> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
+                               
                                 TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
                                       focusColor: Colors.white,
                                       hintText: " Set user name",
-                                      hintStyle: TextStyle(color: Colors.grey),
+                                      hintStyle: TextStyle(color: const Color.fromARGB(255, 104, 104, 104)),
                                       focusedBorder: outlineInputBorder,
                                       enabledBorder: outlineInputBorder,
                                       fillColor: Colors.white),
@@ -135,12 +120,11 @@ class _SettingTabState extends State<SettingTab> {
                                   height: 1.h,
                                 ),
                                 TextFormField(
-                                  style: TextStyle(color: Colors.white),
                                   keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
                                       focusColor: Colors.white,
                                       hintText: " Add funds",
-                                      hintStyle: TextStyle(color: Colors.grey),
+                                      hintStyle: TextStyle(color: const Color.fromARGB(255, 104, 104, 104)),
                                       focusedBorder: outlineInputBorder,
                                       enabledBorder: outlineInputBorder,
                                       fillColor: Colors.white),
@@ -156,8 +140,10 @@ class _SettingTabState extends State<SettingTab> {
                                   ),
                                   child: Padding(
                                     padding: buttonPadding,
-                                    child:
-                                        Text('Save', style: getButtonStyle()),
+                                    child: Text('Save',
+                                        style: textStyle.copyWith(
+                                            fontSize: 18.sp,
+                                            color: Colors.white)),
                                   ),
                                 ),
                               ],
@@ -168,6 +154,7 @@ class _SettingTabState extends State<SettingTab> {
                 ],
               ),
             ),
+            // To avoid Keyboard from covering the input when user type
             Padding(
                 padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom))

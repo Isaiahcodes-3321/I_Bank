@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'Model/userName.dart';
+import 'Model/receiverDetails.dart';
 import 'SplashScreen/splashScreen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (_) => UserName()),
+          ChangeNotifierProvider(create: (_) => ReceiverDetails()),
         ],
         child: ResponsiveSizer(
           builder: (context, orientation, screenType) {
