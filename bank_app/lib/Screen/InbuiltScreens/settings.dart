@@ -6,7 +6,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:image_picker_platform_interface/image_picker_platform_interface.dart';
 
 import '../../Constant/Themes.dart';
-import '../../Constant/reUsedTextField.dart';
 
 class SettingTab extends StatefulWidget {
   SettingTab({super.key});

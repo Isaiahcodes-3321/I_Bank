@@ -9,17 +9,14 @@ class ReUsedTextField extends StatelessWidget {
     required this.controller,
     required this.keyboardType,
     required this.hintText,
+    required this.onChanged,
   });
 
   // passing the required properties from the textfield
   final TextInputType keyboardType;
   final String hintText;
   final TextEditingController controller;
-
-  final outlineInputBorder = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(8),
-    borderSide: BorderSide(color: Colors.white),
-  );
+  final void Function(String) onChanged; 
 
   var outlineInputBordeR = OutlineInputBorder(
       borderRadius: BorderRadius.circular(20.sp),
@@ -41,9 +38,11 @@ class ReUsedTextField extends StatelessWidget {
             enabledBorder: outlineInputBordeR,
             fillColor: Colors.white,
           ),
+          onChanged: onChanged,
         ),
         SizedBox(height: 2.h),
       ],
     );
   }
 }
+

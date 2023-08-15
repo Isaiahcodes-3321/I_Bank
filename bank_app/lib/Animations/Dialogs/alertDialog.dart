@@ -3,8 +3,9 @@ import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../Constant/Themes.dart';
-import '../Model/receiverDetails.dart';
+import '../../Constant/Themes.dart';
+import '../../Model/receiverDetails.dart';
+
 
 class ShowDialog extends StatelessWidget {
   const ShowDialog({super.key});

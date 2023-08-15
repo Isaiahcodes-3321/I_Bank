@@ -4,7 +4,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 import '../Constant/Themes.dart';
 import 'InbuiltScreens/history.dart';
-import 'InbuiltScreens/home.dart';
+import 'InbuiltScreens/Home/home.dart';
 import 'InbuiltScreens/settings.dart';
 import 'InbuiltScreens/transfer.dart';
 
@@ -19,13 +19,13 @@ class _DashBoardscreeenState extends State<DashBoardscreeen> {
   int currentPage = 0;
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   var backgroundColor = Color.fromRGBO(101, 0, 56, 1.0);
+
   late final List<Widget> tabPages = [
     HomeTab(),
     TransferTab(),
     HistoryTab(),
     SettingTab(),
   ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
