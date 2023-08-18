@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../Storage/person.dart';
+
+
+//my storage Make Hive accessible anywhere,
+late Box<UserStorage> userStorage;
+late Box<ReceiverStorage> receiverStorage;
 
 var fontFamily = 'Rubik-VariableFont_wght';
 

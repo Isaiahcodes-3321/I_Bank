@@ -6,7 +6,7 @@ import '../../Animations/Dialogs/alertDialogErrorMessage.dart';
 import '../../Constant/Themes.dart';
 import '../../Constant/reUsedTextField.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
-
+import 'package:date_format/date_format.dart';
 import '../../Model/receiverDetails.dart';
 
 class TransferTab extends StatefulWidget {
@@ -18,6 +18,7 @@ class TransferTab extends StatefulWidget {
 
 class _TransferTabState extends State<TransferTab> {
   var date = '';
+  var time = '';
 
   var outlineInputBorder = OutlineInputBorder(
       borderRadius: BorderRadius.circular(20.sp),
@@ -67,22 +68,27 @@ class _TransferTabState extends State<TransferTab> {
                         keyboardType: TextInputType.number,
                         hintText: " Amount",
                         onChanged: (value) {
-                          var datetime = DateTime.now();
-                          date =
-                              'Date ${datetime.day}, ${datetime.month}, ${datetime.year}, Time ${datetime.hour}:${datetime.minute}:${datetime.second}';
+                          // get the current date and month and time
+                          setState(() {
+                            var datetime = DateTime.now();
+                            date = formatDate(
+                                DateTime.now(), [d, ", ", M, ", ", yyyy]);
+                            time =
+                                '${datetime.hour}:${datetime.minute}:${datetime.second}';
+                          });
                         },
                       ),
                       ReUsedTextField(
                         controller: receiverPhoneNumbeR,
                         keyboardType: TextInputType.number,
                         hintText: " Phone Number",
-                        onChanged: (value){},
+                        onChanged: (value) {},
                       ),
                       ReUsedTextField(
                         controller: receiverName,
                         keyboardType: TextInputType.text,
                         hintText: " Name",
-                        onChanged: (value){},
+                        onChanged: (value) {},
                       ),
                       SizedBox(
                         height: 5.h,
@@ -99,6 +105,7 @@ class _TransferTabState extends State<TransferTab> {
                               },
                             );
                           } else {
+
                             Provider.of<ReceiverDetails>(context, listen: false)
                               ..updateMoneySent(receiverAmount.text,
                                   receiverName.text, receiverPhoneNumbeR.text);
