@@ -1,4 +1,4 @@
-import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -8,7 +8,6 @@ import 'InbuiltScreens/history.dart';
 import 'InbuiltScreens/Home/home.dart';
 import 'InbuiltScreens/settings.dart';
 import 'InbuiltScreens/transfer.dart';
-import 'package:image_picker/image_picker.dart';
 
 class DashBoardscreeen extends StatefulWidget {
   const DashBoardscreeen({super.key});
@@ -33,13 +32,15 @@ class _DashBoardscreeenState extends State<DashBoardscreeen> {
     fontSize: 17.sp,
   );
 
+
+
   @override
   Widget build(BuildContext context) {
     // Get the user data from the box
     late UserStorage? userName =
         userStorage.isNotEmpty ? userStorage.getAt(0) : null;
-    late UserStorage? userPicture =
-        userStorage.isNotEmpty ? userStorage.getAt(0) : null;
+    late UserStorageImage? userPicture =
+        userStorageImage.isNotEmpty ? userStorageImage.getAt(0) : null;
 
     return Scaffold(
       appBar: AppBar(
@@ -66,15 +67,10 @@ class _DashBoardscreeenState extends State<DashBoardscreeen> {
                 backgroundColor: backgroundColor,
                 child: userPicture != null
                     ? CircleAvatar(
-                        backgroundImage: userPicture.userImage is String &&
-                                userPicture.userImage.isNotEmpty
-                            ? AssetImage(userPicture.userImage)
+                        backgroundImage: (userPicture.userImage.isNotEmpty)
+                            ? MemoryImage(userPicture.userImage)
                                 as ImageProvider<Object>?
-                            : userPicture.userImage is XFile &&
-                                    userPicture.userImage.path.isNotEmpty
-                                ? FileImage(File(userPicture.userImage.path))
-                                    as ImageProvider<Object>?
-                                : AssetImage('images/logo.png'),
+                            : AssetImage(''),
                       )
                     : Container(
                         decoration: BoxDecoration(

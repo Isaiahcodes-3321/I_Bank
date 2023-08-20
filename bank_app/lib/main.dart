@@ -21,8 +21,9 @@ Future<void> main() async {
 // setting up hive
 Future<void> setupHive() async {
   await Hive.initFlutter();
-  Hive.registerAdapter(UserstorageAdapter());
+  Hive.registerAdapter(UserStorageAdapter());
   Hive.registerAdapter(ReceiverStorageAdapter());
+  Hive.registerAdapter(UserStorageImageAdapter());
   await openHiveBoxes();
 }
 
@@ -30,6 +31,7 @@ Future<void> setupHive() async {
 Future<void> openHiveBoxes() async {
   userStorage = await Hive.openBox<UserStorage>('userBox');
   receiverStorage = await Hive.openBox<ReceiverStorage>('receiverBox');
+  userStorageImage = await Hive.openBox<UserStorageImage>('userBoxImage');
 }
 
 

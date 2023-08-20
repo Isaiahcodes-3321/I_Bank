@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
 import '../Storage/person.dart';
 
 
 //my storage Make Hive accessible anywhere,
 late Box<UserStorage> userStorage;
+late Box<UserStorageImage> userStorageImage;
 late Box<ReceiverStorage> receiverStorage;
 
 var fontFamily = 'Rubik-VariableFont_wght';
 
 var backgroundColor = Color.fromRGBO(101, 0, 56, 1.0);
+var snackbarBackgroundColor = Color.fromRGBO(134, 20, 83, 0.705);
 
 var textStyle = TextStyle(
     color: Color.fromRGBO(101, 0, 56, 1.0),
@@ -26,5 +27,4 @@ var buttonPadding =
 var outlineInputBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(20.sp),
     borderSide: BorderSide(color: Color.fromRGBO(101, 0, 56, 1.0), width: 1.w));
-
 

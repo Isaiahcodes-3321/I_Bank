@@ -23,6 +23,7 @@ class _HomeTabState extends State<HomeTab> {
     _startAnimation();
   }
 
+  // animation to the Card background
   void _startAnimation() {
     Future.delayed(Duration(seconds: 4), () {
       setState(() {
@@ -34,6 +35,7 @@ class _HomeTabState extends State<HomeTab> {
 
   @override
   Widget build(BuildContext context) {
+
     // Get the user data from the box
     late UserStorage? userFund =
         userStorage.isNotEmpty ? userStorage.getAt(0) : null;
@@ -110,7 +112,7 @@ class _HomeTabState extends State<HomeTab> {
                                       color: _colors[_currentColorIndex] ==
                                               Colors.green
                                           ? Colors
-                                              .white // Use a contrasting color for green background
+                                              .white 
                                           : Colors.white,
                                       fontSize: 19.sp,
                                     ),
@@ -133,15 +135,15 @@ class _HomeTabState extends State<HomeTab> {
                                                                 _currentColorIndex] ==
                                                             Colors.green
                                                         ? Colors
-                                                            .white // Use a contrasting color for green background
+                                                            .white 
                                                         : Colors.white,
                                                   ),
                                                 ),
                                       IconButton(
                                         icon: hideMoney
-                                            ? const Icon(Icons.visibility,
+                                            ? const Icon(Icons.visibility_off,
                                                 color: Colors.white)
-                                            : const Icon(Icons.visibility_off,
+                                            : const Icon(Icons.visibility,
                                                 color: Colors.white),
                                         onPressed: () {
                                           setState(() {

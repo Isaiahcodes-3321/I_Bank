@@ -20,3 +20,6 @@ class ReceiverDetails extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+
+

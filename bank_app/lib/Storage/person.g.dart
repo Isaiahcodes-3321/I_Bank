@@ -6,7 +6,7 @@ part of 'person.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class UserstorageAdapter extends TypeAdapter<UserStorage> {
+class UserStorageAdapter extends TypeAdapter<UserStorage> {
   @override
   final int typeId = 1;
 
@@ -16,10 +16,9 @@ class UserstorageAdapter extends TypeAdapter<UserStorage> {
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return UserStorage(
-      funds: fields[1] as dynamic,
-      name: fields[0] as dynamic,
-      userImage: fields[0] as dynamic,
+    return  UserStorage(
+      name: fields[0] as String,
+      funds: fields[1].toInt() as int, 
     );
   }
 
@@ -39,7 +38,7 @@ class UserstorageAdapter extends TypeAdapter<UserStorage> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is UserstorageAdapter &&
+      other is UserStorageAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
@@ -86,6 +85,40 @@ class ReceiverStorageAdapter extends TypeAdapter<ReceiverStorage> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is ReceiverStorageAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class UserStorageImageAdapter extends TypeAdapter<UserStorageImage> {
+  @override
+  final int typeId = 3;
+
+  @override
+  UserStorageImage read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return UserStorageImage(
+      userImage: fields[0] as Uint8List,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, UserStorageImage obj) {
+    writer
+      ..writeByte(1)
+      ..writeByte(0)
+      ..write(obj.userImage);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is UserStorageImageAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

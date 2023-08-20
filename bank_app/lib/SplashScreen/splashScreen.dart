@@ -15,7 +15,7 @@ Timer? _timer;
 
   // start the timer
   void initState() {
-      _timer = Timer(const Duration(seconds: 2), () => Navigator.push(
+      _timer = Timer(const Duration(seconds: 1), () => Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => Login_Page()),
     ));

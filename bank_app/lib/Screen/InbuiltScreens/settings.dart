@@ -1,8 +1,10 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../Animations/Dialogs/AddMoreFunds.dart';
 import '../../Constant/Themes.dart';
 import '../../Storage/person.dart';
 
@@ -14,6 +16,44 @@ class SettingTab extends StatefulWidget {
 }
 
 class _SettingTabState extends State<SettingTab> {
+  TextEditingController userFunds = TextEditingController();
+  TextEditingController userName = TextEditingController();
+  late Box<UserStorage> userStorage;
+  late Box<UserStorageImage> userStorageImage;
+
+  @override
+  void initState() {
+    super.initState();
+    openHiveBox();
+    openHiveBoxImage();
+  }
+
+  // Open Hive box
+  Future<void> openHiveBox() async {
+    userStorage = await Hive.openBox<UserStorage>('userBox');
+  }
+
+  // Write data
+  Future<void> writeUserData() async {
+    final int fundsValue = int.parse(userFunds.text);
+    // final double fundsValue = double.tryParse(userFunds.text) ?? 0.0;
+
+    if (userName.text.isNotEmpty) {
+      final userStorageKey = 'userName_Funds';
+      final userStorageData = UserStorage(
+        name: userName.text,
+        funds: fundsValue,
+      );
+
+      await userStorage.put(userStorageKey, userStorageData);
+    }
+  }
+
+  // Open Hive box
+  Future<void> openHiveBoxImage() async {
+    userStorageImage = await Hive.openBox<UserStorageImage>('userBoxImage');
+  }
+
   final ImagePicker picker = ImagePicker();
   XFile? image;
 
@@ -25,44 +65,31 @@ class _SettingTabState extends State<SettingTab> {
     });
   }
 
-  TextEditingController userFunds = TextEditingController();
-  TextEditingController userName = TextEditingController();
-  late Box<UserStorage> userStorage;
-
-  @override
-  void initState() {
-    super.initState();
-    openHiveBox();
-  }
-
-  // Open Hive box
-  Future<void> openHiveBox() async {
-    userStorage = await Hive.openBox<UserStorage>('userBox');
-  }
-
-  // Write data
-  Future<void> writeUserData() async {
-    final double fundsValue = double.tryParse(userFunds.text) ?? 0.0;
+// Save Image
+  Future<void> saveUserDataImage() async {
     final XFile? imagePath = image;
 
-    if (userName.text.isNotEmpty) {
-      final userStorageKey = 'userName_Funds';
-      final userStorageData = UserStorage(
-        name: userName.text,
-        funds: fundsValue,
-        userImage: imagePath,
-      );
+    if (imagePath == null) return;
+    Uint8List imageBytes = await imagePath.readAsBytes();
 
-      await userStorage.put(userStorageKey, userStorageData);
-    }
+    final userStorageKey1 = 'userNameImage';
+    final userStorageImage1 = UserStorageImage(
+      userImage: imageBytes,
+    );
+
+    // Use userStorageImage box to put data
+    await userStorageImage.put(userStorageKey1, userStorageImage1);
   }
 
   // DeleteData
   Future<void> deleteUserData() async {
-    await userStorage.clear();
+    userStorage.clear();
+    userFunds.clear();
+    userName.clear();
+    userStorageImage.clear();
   }
 
-    @override
+  @override
   void dispose() {
     userFunds.dispose();
     userName.dispose();
@@ -82,44 +109,74 @@ class _SettingTabState extends State<SettingTab> {
                   Container(
                     width: double.infinity,
                     child: Align(
-                      alignment: Alignment.centerRight,
+                      alignment: Alignment.topRight,
                       child: PopupMenuButton(
                           itemBuilder: (context) => [
                                 PopupMenuItem(
-                                    height: 4.h,
-                                    child: GestureDetector(
-                                        onTap: () async {
-                                          await deleteUserData();
-                                          final remainingKeys =
-                                              userStorage.keys.toList();
-                                          if (remainingKeys.isEmpty) {
-                                            showDialog(
-                                              context: context,
-                                              builder: (context) {
-                                                return AlertDialog(
-                                                  title: Text('Data Deleted'),
-                                                  content: Text(
-                                                      'All data has been deleted successfully.'),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                      child: Text('OK'),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
+                                  height: 4.h,
+                                  child: GestureDetector(
+                                    onTap: () async {
+                                      showDialog(
+                                        context: context,
+                                         builder: (context) {
+                                           return AddMoreFunds();
+                                         },);
+                                    },
+                                    child: Padding(
+                                      padding:
+                                          EdgeInsets.only(left: 5.w, top: 1.h),
+                                      child: Text(
+                                        'Add more funds',
+                                        style: textStyle.copyWith(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 5.w),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                PopupMenuItem(
+                                  height: 4.h,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                          padding: EdgeInsets.only(top: 1.h),
+                                          child: Divider(
+                                            color: Colors.black,
+                                          )),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 5.w, top: 1.h, bottom: 1.h),
+                                        child: GestureDetector(
+                                          onTap: () async {
+                                            await deleteUserData();
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                backgroundColor:
+                                                    snackbarBackgroundColor,
+                                                content: Text(
+                                                    "All data have been deleted successfully",
+                                                    style: TextStyle(
+                                                        color: Colors.white)),
+                                                duration: Duration(seconds: 2),
+                                              ),
                                             );
-                                          }
-                                        },
-                                        child: Text(
-                                          'Reset Profile',
-                                          style: textStyle.copyWith(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 5.w),
-                                        )))
+                                          },
+                                          child: Text(
+                                            'Reset Profile',
+                                            style: textStyle.copyWith(
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 5.w),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ]),
                     ),
                   ),
@@ -152,20 +209,53 @@ class _SettingTabState extends State<SettingTab> {
                                     ),
                             ),
                             SizedBox(height: 3.h),
-                            TextButton(
-                              onPressed: () {
-                                getImage();
-                              },
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all(backgroundColor),
-                              ),
-                              child: Padding(
-                                padding: buttonPadding,
-                                child: Text('Select',
-                                    style: textStyle.copyWith(
-                                        fontSize: 18.sp, color: Colors.white)),
-                              ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                TextButton(
+                                  onPressed: () {
+                                    getImage();
+                                  },
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                        backgroundColor),
+                                  ),
+                                  child: Padding(
+                                    padding: buttonPadding,
+                                    child: Text('Select',
+                                        style: textStyle.copyWith(
+                                            fontSize: 18.sp,
+                                            color: Colors.white)),
+                                  ),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    saveUserDataImage();
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        backgroundColor:
+                                            snackbarBackgroundColor,
+                                        content: Text(
+                                            "Image saved Successfully",
+                                            style:
+                                                TextStyle(color: Colors.white)),
+                                        duration: Duration(seconds: 2),
+                                      ),
+                                    );
+                                  },
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                        backgroundColor),
+                                  ),
+                                  child: Padding(
+                                    padding: buttonPadding,
+                                    child: Text('Save Image',
+                                        style: textStyle.copyWith(
+                                            fontSize: 18.sp,
+                                            color: Colors.white)),
+                                  ),
+                                ),
+                              ],
                             ),
                             SizedBox(
                               height: 5.h,
@@ -208,42 +298,42 @@ class _SettingTabState extends State<SettingTab> {
                                   onPressed: () async {
                                     await writeUserData();
                                     // Check if data is added to Hive storage
-                                    if (userStorage
-                                        .containsKey('userName_Funds')) {
-                                      final storedData =
-                                          userStorage.get('userName_Funds');
-                                      showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return AlertDialog(
-                                            title: Text('Saved Successfully',
-                                                style: textStyle.copyWith(
-                                                    fontSize: 23.sp,
-                                                    color: Color.fromRGBO(
-                                                        31, 0, 17, 1))),
-                                            content: Text(
-                                                'All data have been saved.',
-                                                style: TextStyle(
-                                                    color: Color.fromRGBO(
-                                                        31, 0, 17, 1))),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                                child: Text('OK',
-                                                    style: textStyle.copyWith(
-                                                        fontSize: 18.sp,
-                                                        color: Color.fromRGBO(
-                                                            11, 172, 0, 1))),
-                                              ),
-                                            ],
-                                          );
-                                        },
+                                    if (userFunds.text.isEmpty ||
+                                        userName.text.isEmpty) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          backgroundColor:
+                                              snackbarBackgroundColor,
+                                          content: Text("Inputs are required",
+                                              style: TextStyle(
+                                                  color: Colors.white)),
+                                          duration: Duration(seconds: 2),
+                                        ),
                                       );
-                                      print(
-                                          'Stored Data: ${storedData?.name}, ${storedData?.funds}');
+                                    } else {
+                                      if (userStorage
+                                          .containsKey('userName_Funds')) {
+                                        final storedData =
+                                            userStorage.get('userName_Funds');
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            backgroundColor:
+                                                snackbarBackgroundColor,
+                                            content: Text("Successfully Saved",
+                                                style: TextStyle(
+                                                    color: Colors.white)),
+                                            duration: Duration(seconds: 2),
+                                          ),
+                                        );
+                                        print(
+                                            'Stored Data: ${storedData?.name}, ${storedData?.funds}');
+                                        userFunds.clear();
+                                        userName.clear();
+                                      }
                                     }
+                                    // dispose();
                                   },
                                   style: ButtonStyle(
                                     backgroundColor: MaterialStateProperty.all(
