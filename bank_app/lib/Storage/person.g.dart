@@ -55,7 +55,7 @@ class ReceiverStorageAdapter extends TypeAdapter<ReceiverStorage> {
     };
     return ReceiverStorage(
       receiverName: fields[0] as String,
-      receiverAmount: fields[1] as String,
+      receiverAmount1: fields[1] as String,
       receiverNumber: fields[2] as String,
       timeSent: fields[3] as String,
       dateSent: fields[4] as String,
@@ -69,7 +69,7 @@ class ReceiverStorageAdapter extends TypeAdapter<ReceiverStorage> {
       ..writeByte(0)
       ..write(obj.receiverName)
       ..writeByte(1)
-      ..write(obj.receiverAmount)
+      ..write(obj.receiverAmount1)
       ..writeByte(2)
       ..write(obj.receiverNumber)
       ..writeByte(3)

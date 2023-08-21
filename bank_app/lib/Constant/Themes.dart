@@ -27,4 +27,3 @@ var buttonPadding =
 var outlineInputBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(20.sp),
     borderSide: BorderSide(color: Color.fromRGBO(101, 0, 56, 1.0), width: 1.w));
-

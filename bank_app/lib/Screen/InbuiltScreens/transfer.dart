@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import '../../Animations/Dialogs/Insufficient funds.dart';
 import '../../Animations/Dialogs/alertDialog.dart';
-import '../../Animations/Dialogs/alertDialogErrorMessage.dart';
 import '../../Constant/Themes.dart';
 import '../../Constant/reUsedTextField.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:date_format/date_format.dart';
 import '../../Model/receiverDetails.dart';
+import '../../Storage/person.dart';
 
 class TransferTab extends StatefulWidget {
   const TransferTab({super.key});
@@ -20,19 +22,62 @@ class _TransferTabState extends State<TransferTab> {
   var date = '';
   var time = '';
 
-  var outlineInputBorder = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(20.sp),
-      borderSide:
-          BorderSide(color: Color.fromRGBO(101, 0, 56, 1.0), width: 1.w));
-
 // get user input
-  var receiverAmount = TextEditingController();
-  var receiverName = TextEditingController();
-  var receiverPhoneNumbeR = TextEditingController();
+  TextEditingController reCeiverAmount = TextEditingController();
+  TextEditingController receiverName = TextEditingController();
+  TextEditingController receiverPhoneNumbeR = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    openHiveBox();
+  }
+
+  // Open Hive box for user storage
+  Future<void> openHiveBox() async {
+    receiverStorage = await Hive.openBox<ReceiverStorage>('receiverBox');
+  }
+
+  // Write data
+  Future<void> writeUserData() async {
+    if (reCeiverAmount.text.isNotEmpty) {
+      // final userStorageKey = 'userName_Funds';
+      final userStorageData = ReceiverStorage(
+        dateSent: date,
+        timeSent: time,
+        receiverAmount1: reCeiverAmount.text,
+        receiverName: receiverName.text,
+        receiverNumber: receiverPhoneNumbeR.text,
+      );
+      await receiverStorage.add(userStorageData);
+    }
+  }
+
+//  update the user Money
+  late int fundsValue1;
+  Future<void> subtractMoney() async {
+    fundsValue1 = int.parse(reCeiverAmount.text);
+
+    if (reCeiverAmount.text.isNotEmpty) {
+      String userStorageKey = 'userName_Funds';
+
+      // Check if the key exists in the box
+      if (userStorage.containsKey(userStorageKey)) {
+        // Get the existing data
+        UserStorage? existingData = userStorage.get(userStorageKey);
+
+        // Update the funds field
+        existingData?.funds -= fundsValue1;
+
+        // Put the updated data back into the box
+        userStorage.put(userStorageKey, existingData!);
+      }
+    }
+  }
 
   @override
   void dispose() {
-    receiverAmount.dispose();
+    reCeiverAmount.dispose();
     receiverName.dispose();
     receiverPhoneNumbeR.dispose();
     super.dispose();
@@ -64,7 +109,7 @@ class _TransferTabState extends State<TransferTab> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       ReUsedTextField(
-                        controller: receiverAmount,
+                        controller: reCeiverAmount,
                         keyboardType: TextInputType.number,
                         hintText: " Amount",
                         onChanged: (value) {
@@ -94,33 +139,68 @@ class _TransferTabState extends State<TransferTab> {
                         height: 5.h,
                       ),
                       TextButton(
-                        onPressed: () {
-                          if (receiverAmount.text.isEmpty ||
+                        onPressed: () async {
+                          if (reCeiverAmount.text.isEmpty ||
                               receiverName.text.isEmpty ||
                               receiverPhoneNumbeR.text.isEmpty) {
-                            showPlatformDialog(
-                              context: context,
-                              builder: (context) {
-                                return (ShowDialogERRORINPUT());
-                              },
-                            );
+                                 ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            backgroundColor:
+                                                snackbarBackgroundColor,
+                                            content: FittedBox(
+                                              child: Text("Transfer Failed! Please fill all inputs correctly",
+                                                  style: TextStyle(
+                                                      color: Colors.white)),
+                                            ),
+                                            duration: Duration(seconds: 2),
+                                          ),
+                                        );
                           } else {
+                            // Get the existing data
+                            String userStorageKey = 'userName_Funds';
+                            UserStorage? existingData =
+                                userStorage.get(userStorageKey);
 
-                            Provider.of<ReceiverDetails>(context, listen: false)
-                              ..updateMoneySent(receiverAmount.text,
-                                  receiverName.text, receiverPhoneNumbeR.text);
+                            fundsValue1 = int.parse(reCeiverAmount.text);
+                            if (existingData != null) {
+                              if (existingData.funds < fundsValue1) {
+                                showPlatformDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return (Insufficientfunds());
+                                  },
+                                );
+                              } else {
+                                Provider.of<ReceiverDetails>(context,
+                                    listen: false)
+                                  ..updateMoneySent(
+                                      reCeiverAmount.text,
+                                      receiverName.text,
+                                      receiverPhoneNumbeR.text);
 
-                            showPlatformDialog(
-                              context: context,
-                              builder: (context) {
-                                return (ShowDialog());
-                              },
-                            );
+                                      // show dialog of Transaction successfully
+                                showPlatformDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return (ShowDialog());
+                                  },
+                                );
 
-                            // if user clicks on this clear text that have been inputed by the user
-                            receiverAmount.clear();
-                            receiverName.clear();
-                            receiverPhoneNumbeR.clear();
+                                //  calling funtion to subtract money when user send any amount
+                                setState(() {
+                                  subtractMoney();
+                                   writeUserData();
+                                });
+
+                                
+                                print('Stored Data');
+                                // if user clicks on ok clear text that have been inputed by the user
+                                reCeiverAmount.clear();
+                                receiverName.clear();
+                                receiverPhoneNumbeR.clear();
+                              }
+                            }
                           }
                         },
                         style: ButtonStyle(

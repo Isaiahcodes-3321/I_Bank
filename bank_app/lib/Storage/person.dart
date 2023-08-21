@@ -24,7 +24,7 @@ class UserStorage {
 class ReceiverStorage {
   ReceiverStorage({
     required this.receiverName,
-    required this.receiverAmount,
+    required this.receiverAmount1,
     required this.receiverNumber,
     required this.timeSent,
     required this.dateSent,
@@ -32,19 +32,19 @@ class ReceiverStorage {
 
   // receiver details
   @HiveField(0)
-  final String receiverName;
+   String receiverName;
 
   @HiveField(1)
-  final String receiverAmount;
+   String receiverAmount1;
 
   @HiveField(2)
-  final String receiverNumber;
+   String receiverNumber;
 
   @HiveField(3)
-  final String timeSent;
+   String timeSent;
 
   @HiveField(4)
-  final String dateSent;
+   String dateSent;
 }
 
 

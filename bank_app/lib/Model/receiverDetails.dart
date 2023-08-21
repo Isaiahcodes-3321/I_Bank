@@ -11,6 +11,7 @@ class ReceiverDetails extends ChangeNotifier {
   // get The receiver Phone number that the user type
   String receiverPhoneNumber = '';
   String get _receiverPhoneNumber => receiverPhoneNumber;
+  
 
   void updateMoneySent(
       String sendmoney, String receiverName, String receiverPhoneNumber) {

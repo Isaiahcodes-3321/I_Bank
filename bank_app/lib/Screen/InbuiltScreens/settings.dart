@@ -18,8 +18,6 @@ class SettingTab extends StatefulWidget {
 class _SettingTabState extends State<SettingTab> {
   TextEditingController userFunds = TextEditingController();
   TextEditingController userName = TextEditingController();
-  late Box<UserStorage> userStorage;
-  late Box<UserStorageImage> userStorageImage;
 
   @override
   void initState() {
@@ -28,7 +26,7 @@ class _SettingTabState extends State<SettingTab> {
     openHiveBoxImage();
   }
 
-  // Open Hive box
+  // Open Hive box for user storage
   Future<void> openHiveBox() async {
     userStorage = await Hive.openBox<UserStorage>('userBox');
   }
@@ -36,7 +34,6 @@ class _SettingTabState extends State<SettingTab> {
   // Write data
   Future<void> writeUserData() async {
     final int fundsValue = int.parse(userFunds.text);
-    // final double fundsValue = double.tryParse(userFunds.text) ?? 0.0;
 
     if (userName.text.isNotEmpty) {
       final userStorageKey = 'userName_Funds';
@@ -49,14 +46,15 @@ class _SettingTabState extends State<SettingTab> {
     }
   }
 
-  // Open Hive box
+  // Open Hive box for image 
   Future<void> openHiveBoxImage() async {
     userStorageImage = await Hive.openBox<UserStorageImage>('userBoxImage');
   }
 
   final ImagePicker picker = ImagePicker();
   XFile? image;
-
+  
+  // get image from user phone storage
   Future<void> getImage() async {
     final XFile? pickedFile =
         await picker.pickImage(source: ImageSource.gallery);
@@ -84,6 +82,7 @@ class _SettingTabState extends State<SettingTab> {
   // DeleteData
   Future<void> deleteUserData() async {
     userStorage.clear();
+    receiverStorage.clear();
     userFunds.clear();
     userName.clear();
     userStorageImage.clear();
@@ -296,6 +295,7 @@ class _SettingTabState extends State<SettingTab> {
                                 ),
                                 TextButton(
                                   onPressed: () async {
+                                    // calling my funtion to write data to hive 
                                     await writeUserData();
                                     // Check if data is added to Hive storage
                                     if (userFunds.text.isEmpty ||

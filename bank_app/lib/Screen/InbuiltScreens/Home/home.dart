@@ -26,9 +26,9 @@ class _HomeTabState extends State<HomeTab> {
   // animation to the Card background
   void _startAnimation() {
     Future.delayed(Duration(seconds: 4), () {
-      setState(() {
+      // setState(() {
         _currentColorIndex = (_currentColorIndex + 1) % _colors.length;
-      });
+      // });
       _startAnimation();
     });
   }
