@@ -91,7 +91,7 @@ class _TransferTabState extends State<TransferTab> {
           padding: EdgeInsets.all(20.sp),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text('Transfer', style: textStyle.copyWith(fontSize: 23.sp)),
+            Text('Transfer', style: textStyle.copyWith(fontSize: 25.sp)),
             SizedBox(
               height: 5.h,
             ),
@@ -151,7 +151,7 @@ class _TransferTabState extends State<TransferTab> {
                                             content: FittedBox(
                                               child: Text("Transfer Failed! Please fill all inputs correctly",
                                                   style: TextStyle(
-                                                      color: Colors.white)),
+                                                      color: Colors.white,fontFamily: fontFamily)),
                                             ),
                                             duration: Duration(seconds: 2),
                                           ),

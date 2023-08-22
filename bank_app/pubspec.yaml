@@ -50,9 +50,9 @@ flutter:
 
 
   fonts:
-    - family: Rubik-VariableFont_wght
+    - family: BodoniModa-VariableFont_opsz,wght
       fonts:
-        - asset: Font/Rubik-VariableFont_wght.ttf
+        - asset: Font/BodoniModa-VariableFont_opsz,wght.ttf
         # - asset: fonts/Schyler-Italic.ttf
         #   style: italic
   #   - family: Trajan Pro

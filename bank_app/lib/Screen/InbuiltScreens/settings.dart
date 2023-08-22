@@ -160,7 +160,7 @@ class _SettingTabState extends State<SettingTab> {
                                                 content: Text(
                                                     "All data have been deleted successfully",
                                                     style: TextStyle(
-                                                        color: Colors.white)),
+                                                        color: Colors.white,fontFamily: fontFamily)),
                                                 duration: Duration(seconds: 2),
                                               ),
                                             );
@@ -237,7 +237,7 @@ class _SettingTabState extends State<SettingTab> {
                                         content: Text(
                                             "Image saved Successfully",
                                             style:
-                                                TextStyle(color: Colors.white)),
+                                                TextStyle(color: Colors.white,fontFamily: fontFamily)),
                                         duration: Duration(seconds: 2),
                                       ),
                                     );
@@ -307,7 +307,7 @@ class _SettingTabState extends State<SettingTab> {
                                               snackbarBackgroundColor,
                                           content: Text("Inputs are required",
                                               style: TextStyle(
-                                                  color: Colors.white)),
+                                                  color: Colors.white,fontFamily: fontFamily)),
                                           duration: Duration(seconds: 2),
                                         ),
                                       );
@@ -323,7 +323,7 @@ class _SettingTabState extends State<SettingTab> {
                                                 snackbarBackgroundColor,
                                             content: Text("Successfully Saved",
                                                 style: TextStyle(
-                                                    color: Colors.white)),
+                                                    color: Colors.white,fontFamily: fontFamily)),
                                             duration: Duration(seconds: 2),
                                           ),
                                         );

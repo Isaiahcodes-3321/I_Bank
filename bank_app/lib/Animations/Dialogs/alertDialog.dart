@@ -12,21 +12,25 @@ class ShowDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BasicDialogAlert(
+      
       title: FittedBox(
-        child: Text("Tranfer Successful!",
-            style: textStyle.copyWith(
-                fontSize: 23.sp, color: Color.fromRGBO(31, 0, 17, 1))),
+        child: Column( crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+             Icon(Icons.gpp_good_outlined,color: backgroundColor,size: 41.sp),
+            Text("Transfer Successful!",
+                style: textStyle.copyWith(
+                    fontSize: 23.sp, color: Color.fromRGBO(31, 0, 17, 1))),
+          ],
+        ),
       ),
       // getting the current Transaction details from Providder state management
       content: Consumer<ReceiverDetails>(builder: (context, model, child) {
         try {
           var money = model.sendMoney;
           var receiverName = model.receiverName;
-          var phonePhoneNumber = model.receiverPhoneNumber;
-
           return Text(
-            'You sent \u20A6$money to $receiverName to this number $phonePhoneNumber',
-            style: TextStyle(color: Color.fromRGBO(31, 0, 17, 1)),
+            'You sent \u20A6$money to $receiverName',
+            style: TextStyle(color: Color.fromRGBO(25, 0, 14, 1),fontSize: 20.sp,),
           );
         } catch (e) {
           print("Error in Consumer: $e");

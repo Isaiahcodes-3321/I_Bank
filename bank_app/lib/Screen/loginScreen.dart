@@ -15,12 +15,12 @@ class _Login_PageState extends State<Login_Page> {
   bool hidepassword = true;
   var getUserName = TextEditingController();
   final formKey = GlobalKey<FormState>();
-  var fontFamily = 'Rubik-VariableFont_wght';
+  var fontFamily = 'BodoniModa-VariableFont_opsz,wght';
 
 //  input sizedBox
   var sizedBox = SizedBox(height: 3.h);
   var outlineInputBorder = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(20.sp),
+      borderRadius: BorderRadius.circular(18.sp),
       borderSide: BorderSide(color: Colors.white, width: 1.w));
 
   @override
@@ -150,12 +150,6 @@ class _Login_PageState extends State<Login_Page> {
                                         alignment: Alignment.bottomLeft,
                                         child: GestureDetector(
                                           onTap: () {
-                                            // showDialog(
-                                            //   context: context,
-                                            //   builder: (context) {
-                                            //     return SmsPasssword();
-                                            //   },
-                                            // );
                                           },
                                           child: Text('Forgot Password?',
                                               style: TextStyle(
@@ -198,12 +192,6 @@ class _Login_PageState extends State<Login_Page> {
                       builder: (BuildContext context) => const LoadDasboard(),
                     ),
                   );
-                  // showDialog(
-                  //   context: context,
-                  //   builder: (context) {
-                  //     return LoadDasboard(getUsername: getUserName,);
-                  //   },
-                  // );
                 }
               },
               child: Text('Login',

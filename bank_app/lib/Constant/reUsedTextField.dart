@@ -18,9 +18,7 @@ class ReUsedTextField extends StatelessWidget {
   final TextEditingController controller;
   final void Function(String) onChanged; 
 
-  var outlineInputBordeR = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(20.sp),
-      borderSide: BorderSide(color: backgroundColor, width: 1.w));
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -34,8 +32,8 @@ class ReUsedTextField extends StatelessWidget {
             hintStyle: TextStyle(
               color: const Color.fromARGB(255, 104, 104, 104),
             ),
-            focusedBorder: outlineInputBordeR,
-            enabledBorder: outlineInputBordeR,
+            focusedBorder: outlineInputBorder,
+            enabledBorder: outlineInputBorder,
             fillColor: Colors.white,
           ),
           onChanged: onChanged,

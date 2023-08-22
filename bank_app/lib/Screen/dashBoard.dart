@@ -89,27 +89,28 @@ class _DashBoardscreeenState extends State<DashBoardscreeen> {
         ),
       ),
       body: tabPages[currentPage],
-      bottomNavigationBar: CurvedNavigationBar(
-        key: _bottomNavigationKey,
-        items: <Widget>[
-          Icon(Icons.home, size: 25.sp, color: Colors.white),
-          Icon(Icons.sync_alt_outlined, size: 25.sp, color: Colors.white),
-          Icon(Icons.history, size: 25.sp, color: Colors.white),
-          Icon(Icons.settings, size: 25.sp, color: Colors.white),
-        ],
-        color: backgroundColor,
-        buttonBackgroundColor: backgroundColor,
-        animationCurve: Curves.easeInOut,
-        height: 9.h,
-        backgroundColor: Color.fromRGBO(101, 0, 56, 0.45),
-        animationDuration: Duration(milliseconds: 300),
-        onTap: (index) {
-          setState(() {
-            currentPage = index;
-          });
-        },
-        letIndexChange: (index) => true,
-      ),
+     bottomNavigationBar: CurvedNavigationBar(
+  key: _bottomNavigationKey,
+  items: <Widget>[
+    Icon(Icons.home, size: 25.sp, color: Colors.white),
+    Icon(Icons.sync_alt_outlined, size: 25.sp, color: Colors.white),
+    Icon(Icons.history, size: 25.sp, color: Colors.white),
+    Icon(Icons.settings, size: 25.sp, color: Colors.white),
+  ],
+  color: backgroundColor,
+  buttonBackgroundColor: backgroundColor,
+  animationCurve: Curves.easeInOut,
+  height: 75.0, // Adjust the height value as needed
+  backgroundColor: Color.fromRGBO(101, 0, 56, 0.45),
+  animationDuration: Duration(milliseconds: 300),
+  onTap: (index) {
+    setState(() {
+      currentPage = index;
+    });
+  },
+  letIndexChange: (index) => true,
+),
+
     );
   }
 }

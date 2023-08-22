@@ -67,7 +67,7 @@ class _AddMoreFundsState extends State<AddMoreFunds> {
                       SnackBar(
                         backgroundColor: snackbarBackgroundColor,
                         content: Text("Money added successfully",
-                            style: TextStyle(color: Colors.white)),
+                            style: TextStyle(color: Colors.white,fontFamily: fontFamily)),
                         duration: Duration(seconds: 2),
                       ),
                     );

@@ -9,7 +9,7 @@ late Box<UserStorage> userStorage;
 late Box<UserStorageImage> userStorageImage;
 late Box<ReceiverStorage> receiverStorage;
 
-var fontFamily = 'Rubik-VariableFont_wght';
+var fontFamily = 'BodoniModa-VariableFont_opsz,wght';
 
 var backgroundColor = Color.fromRGBO(101, 0, 56, 1.0);
 var snackbarBackgroundColor = Color.fromRGBO(134, 20, 83, 0.705);
@@ -25,5 +25,5 @@ var buttonPadding =
 
 
 var outlineInputBorder = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(20.sp),
+    borderRadius: BorderRadius.circular(18.sp),
     borderSide: BorderSide(color: Color.fromRGBO(101, 0, 56, 1.0), width: 1.w));

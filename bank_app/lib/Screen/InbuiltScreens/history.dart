@@ -20,25 +20,24 @@ class HistoryTab extends StatelessWidget {
       children: [
         Text.rich(
           TextSpan(
-            style: textStyle.copyWith(fontSize: 23.sp),
+            style: textStyle.copyWith(fontSize: 25.sp),
             children: [
               TextSpan(text: 'Transaction '),
               TextSpan(
                 text: 'History',
                 style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
+              ), ],),
         ),
         SizedBox(
           height: 5.h,
         ),
         Expanded(
-          child: SingleChildScrollView( // Add SingleChildScrollView here
+          child: SingleChildScrollView( 
             child: Column(
               children: [
                 ListView.builder(
                   shrinkWrap: true,
+                  reverse: true,
                   physics: NeverScrollableScrollPhysics(),
                   itemCount: reCeiverstorage.length,
                   itemBuilder: (context, index) {
