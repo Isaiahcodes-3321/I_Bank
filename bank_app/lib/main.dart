@@ -8,6 +8,7 @@ import 'Model/receiverDetails.dart';
 import 'SplashScreen/splashScreen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupHive();

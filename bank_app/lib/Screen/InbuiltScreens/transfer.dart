@@ -10,6 +10,7 @@ import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:date_format/date_format.dart';
 import '../../Model/receiverDetails.dart';
 import '../../Storage/person.dart';
+import 'package:telephony/telephony.dart';
 
 class TransferTab extends StatefulWidget {
   const TransferTab({super.key});
@@ -22,16 +23,41 @@ class _TransferTabState extends State<TransferTab> {
   var date = '';
   var time = '';
 
-// get user input
-  TextEditingController reCeiverAmount = TextEditingController();
-  TextEditingController receiverName = TextEditingController();
-  TextEditingController receiverPhoneNumbeR = TextEditingController();
-
   @override
   void initState() {
     super.initState();
     openHiveBox();
   }
+
+// get user input
+  TextEditingController reCeiverAmount = TextEditingController();
+  TextEditingController receiverName = TextEditingController();
+  TextEditingController receiverPhoneNumbeR = TextEditingController();
+
+  final telephony = Telephony.instance;
+  Future<void> sendSMS() async {
+    final String phoneNumber = receiverPhoneNumbeR.text;
+    final String message = "From I Bank \u20A6$reCeiverAmount have been sent to you";
+
+    bool? permissionsGranted = await telephony.requestPhoneAndSmsPermissions;
+
+    if (permissionsGranted == true) {
+      try {
+        telephony.sendSms(
+          to: phoneNumber,
+          message: message,
+        );
+        print("Sent");
+      } catch (e) {
+        print("Failed to send SMS: $e");
+      }
+    } else {
+      // Handle permissions not granted
+      print("Phone and SMS permissions not granted.");
+    }
+  }
+
+  //  message: "From I Bank \u20A6$reCeiverAmount have been sent to you",
 
   // Open Hive box for user storage
   Future<void> openHiveBox() async {
@@ -91,7 +117,7 @@ class _TransferTabState extends State<TransferTab> {
           padding: EdgeInsets.all(20.sp),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text('Transfer', style: textStyle.copyWith(fontSize: 25.sp)),
+            Text('Transfer', style: textStyle),
             SizedBox(
               height: 5.h,
             ),
@@ -125,7 +151,7 @@ class _TransferTabState extends State<TransferTab> {
                       ),
                       ReUsedTextField(
                         controller: receiverPhoneNumbeR,
-                        keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.phone,
                         hintText: " Phone Number",
                         onChanged: (value) {},
                       ),
@@ -143,19 +169,19 @@ class _TransferTabState extends State<TransferTab> {
                           if (reCeiverAmount.text.isEmpty ||
                               receiverName.text.isEmpty ||
                               receiverPhoneNumbeR.text.isEmpty) {
-                                 ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            backgroundColor:
-                                                snackbarBackgroundColor,
-                                            content: FittedBox(
-                                              child: Text("Transfer Failed! Please fill all inputs correctly",
-                                                  style: TextStyle(
-                                                      color: Colors.white,fontFamily: fontFamily)),
-                                            ),
-                                            duration: Duration(seconds: 2),
-                                          ),
-                                        );
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                backgroundColor: snackbarBackgroundColor,
+                                content: FittedBox(
+                                  child: Text(
+                                      "Transfer Failed! Please fill all inputs correctly",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: fontFamily)),
+                                ),
+                                duration: Duration(seconds: 2),
+                              ),
+                            );
                           } else {
                             // Get the existing data
                             String userStorageKey = 'userName_Funds';
@@ -178,8 +204,10 @@ class _TransferTabState extends State<TransferTab> {
                                       reCeiverAmount.text,
                                       receiverName.text,
                                       receiverPhoneNumbeR.text);
+                                // call the funtion to send the message when this button is click
+                                sendSMS();
 
-                                      // show dialog of Transaction successfully
+                                // show dialog of Transaction successfully
                                 showPlatformDialog(
                                   context: context,
                                   builder: (context) {
@@ -190,10 +218,9 @@ class _TransferTabState extends State<TransferTab> {
                                 //  calling funtion to subtract money when user send any amount
                                 setState(() {
                                   subtractMoney();
-                                   writeUserData();
+                                  writeUserData();
                                 });
 
-                                
                                 print('Stored Data');
                                 // if user clicks on ok clear text that have been inputed by the user
                                 reCeiverAmount.clear();

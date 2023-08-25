@@ -1,3 +1,4 @@
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -8,6 +9,7 @@ import 'InbuiltScreens/history.dart';
 import 'InbuiltScreens/Home/home.dart';
 import 'InbuiltScreens/settings.dart';
 import 'InbuiltScreens/transfer.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 class DashBoardscreeen extends StatefulWidget {
   const DashBoardscreeen({super.key});
@@ -17,6 +19,35 @@ class DashBoardscreeen extends StatefulWidget {
 }
 
 class _DashBoardscreeenState extends State<DashBoardscreeen> {
+  void initState() {
+    super.initState();
+    startInternetCheck();
+  }
+
+  void startInternetCheck() {
+    // keep checking for internet connection every 5 sec 
+    Timer.periodic(Duration(seconds: 5), (timer) async {
+      var connectivityResult = await Connectivity().checkConnectivity();
+      if (connectivityResult == ConnectivityResult.none) showBanner(context);
+    });
+  }
+
+  Future<void> showBanner(BuildContext context) async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.none) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: snackbarBackgroundColor,
+          content: Text(
+              "Failed to continue. Please check your internet connection.",
+              style: TextStyle(color: Colors.white, fontFamily: fontFamily)),
+          duration: Duration(seconds: 4),
+        ),
+      );
+    }
+  }
+
+
   int currentPage = 0;
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   var backgroundColor = Color.fromRGBO(101, 0, 56, 1.0);
@@ -31,8 +62,6 @@ class _DashBoardscreeenState extends State<DashBoardscreeen> {
     color: Colors.white,
     fontSize: 17.sp,
   );
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -89,28 +118,27 @@ class _DashBoardscreeenState extends State<DashBoardscreeen> {
         ),
       ),
       body: tabPages[currentPage],
-     bottomNavigationBar: CurvedNavigationBar(
-  key: _bottomNavigationKey,
-  items: <Widget>[
-    Icon(Icons.home, size: 25.sp, color: Colors.white),
-    Icon(Icons.sync_alt_outlined, size: 25.sp, color: Colors.white),
-    Icon(Icons.history, size: 25.sp, color: Colors.white),
-    Icon(Icons.settings, size: 25.sp, color: Colors.white),
-  ],
-  color: backgroundColor,
-  buttonBackgroundColor: backgroundColor,
-  animationCurve: Curves.easeInOut,
-  height: 75.0, // Adjust the height value as needed
-  backgroundColor: Color.fromRGBO(101, 0, 56, 0.45),
-  animationDuration: Duration(milliseconds: 300),
-  onTap: (index) {
-    setState(() {
-      currentPage = index;
-    });
-  },
-  letIndexChange: (index) => true,
-),
-
+      bottomNavigationBar: CurvedNavigationBar(
+        key: _bottomNavigationKey,
+        items: <Widget>[
+          Icon(Icons.home, size: 25.sp, color: Colors.white),
+          Icon(Icons.sync_alt_outlined, size: 25.sp, color: Colors.white),
+          Icon(Icons.history, size: 25.sp, color: Colors.white),
+          Icon(Icons.settings, size: 25.sp, color: Colors.white),
+        ],
+        color: backgroundColor,
+        buttonBackgroundColor: backgroundColor,
+        animationCurve: Curves.easeInOut,
+        height: 65.0, // Adjust the height value as needed
+        backgroundColor: Color.fromRGBO(101, 0, 56, 0.45),
+        animationDuration: Duration(milliseconds: 300),
+        onTap: (index) {
+          setState(() {
+            currentPage = index;
+          });
+        },
+        letIndexChange: (index) => true,
+      ),
     );
   }
 }
