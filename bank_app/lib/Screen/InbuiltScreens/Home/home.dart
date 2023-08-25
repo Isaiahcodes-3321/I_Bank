@@ -14,7 +14,7 @@ class HomeTab extends StatefulWidget {
 class _HomeTabState extends State<HomeTab> {
   bool hideMoney = false;
 
-  List<Color> _colors = [backgroundColor, Color.fromRGBO(134, 13, 100, 1)];
+  List<Color> _colors = [backgroundColor, Color.fromRGBO(175, 20, 131, 1)];
   int _currentColorIndex = 0;
 
   @override
@@ -23,12 +23,12 @@ class _HomeTabState extends State<HomeTab> {
     _startAnimation();
   }
 
-  // animation to the Card background
+// animation to the Card background
   void _startAnimation() {
     Future.delayed(Duration(seconds: 4), () {
-      // setState(() {
-      _currentColorIndex = (_currentColorIndex + 1) % _colors.length;
-      // });
+      setState(() {
+        _currentColorIndex = (_currentColorIndex + 1) % _colors.length;
+      });
       _startAnimation();
     });
   }
@@ -61,103 +61,106 @@ class _HomeTabState extends State<HomeTab> {
           child: Column(
             children: [
               SizedBox(
-                  width: double.infinity,
-                  child: Card(
-                    elevation: 20,
-                    color: Color.fromARGB(128, 230, 229, 229),
-                    child: AnimatedContainer(
-                      decoration: BoxDecoration(
-                          color: _colors[_currentColorIndex],
-                          borderRadius: BorderRadius.circular(14.sp)),
-                      duration: Duration(seconds: 1),
-                      alignment: Alignment.center,
-                      child: AnimatedOpacity(
-                        duration: Duration(milliseconds: 900),
-                        opacity: _currentColorIndex == 0 ? 1.0 : 1.0,
-                        child: Padding(
-                          padding: EdgeInsets.all(17.sp),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  userName != null
-                                      ? Text("${userName.name}",
-                                          style: txtUserName)
-                                      : Text(".....", style: txtUserName),
-                                  Text(
-                                    '4802 **** **** 2903',
-                                    style: textStyle.copyWith(
-                                      color: _colors[_currentColorIndex] ==
-                                              Colors.green
-                                          ? Colors.white
-                                          : Colors.white,
-                                      fontSize: 20.sp,
-                                    ),
+                width: double.infinity,
+                child: Card(
+                  elevation: 20,
+                  color: Color.fromARGB(128, 230, 229, 229),
+                  child: AnimatedContainer(
+                    decoration: BoxDecoration(
+                      color: _colors[_currentColorIndex],
+                      borderRadius: BorderRadius.circular(14.sp),
+                    ),
+                    duration: Duration(seconds: 1),
+                    alignment: Alignment.center,
+                    child: AnimatedOpacity(
+                      duration: Duration(milliseconds: 900),
+                      opacity: _currentColorIndex == 0 ? 1.0 : 1.0,
+                      child: Padding(
+                        padding: EdgeInsets.all(17.sp),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                userName != null
+                                    ? Text("${userName.name}",
+                                        style: txtUserName)
+                                    : Text(".....", style: txtUserName),
+                                Text(
+                                  '4802 **** **** 2903',
+                                  style: textStyle.copyWith(
+                                    color: _colors[_currentColorIndex] ==
+                                            Colors.green
+                                        ? Colors.white
+                                        : Colors.white,
+                                    fontSize: 20.sp,
                                   ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 3.h,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'BALANCE',
-                                    style: textStyle.copyWith(
-                                      color: _colors[_currentColorIndex] ==
-                                              Colors.green
-                                          ? Colors.white
-                                          : Colors.white,
-                                      fontSize: 19.sp,
-                                    ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 3.h,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'BALANCE',
+                                  style: textStyle.copyWith(
+                                    color: _colors[_currentColorIndex] ==
+                                            Colors.green
+                                        ? Colors.white
+                                        : Colors.white,
+                                    fontSize: 19.sp,
                                   ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      hideMoney
-                                          ? Text('****',
-                                              style: textStyleHomePage)
-                                          : userFund != null
-                                              ? Text("\u20A6${userFund.funds}",
-                                                  style: textStyleHomePage)
-                                              : Text(
-                                                  "\u20A60000",
-                                                  style: TextStyle(
-                                                    fontSize: 20.sp,
-                                                    color:
-                                                        _colors[_currentColorIndex] ==
-                                                                Colors.green
-                                                            ? Colors.white
-                                                            : Colors.white,
-                                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    hideMoney
+                                        ? Text('****', style: textStyleHomePage)
+                                        : userFund != null
+                                            ? Text(
+                                                "\u20A6${userFund.funds}",
+                                                style: textStyleHomePage,
+                                              )
+                                            : Text(
+                                                "\u20A60000",
+                                                style: TextStyle(
+                                                  fontSize: 20.sp,
+                                                  color:
+                                                      _colors[_currentColorIndex] ==
+                                                              Colors.green
+                                                          ? Colors.white
+                                                          : Colors.white,
                                                 ),
-                                      IconButton(
-                                        icon: hideMoney
-                                            ? const Icon(Icons.visibility_off,
-                                                color: Colors.white)
-                                            : const Icon(Icons.visibility,
-                                                color: Colors.white),
-                                        onPressed: () {
-                                          setState(() {
-                                            hideMoney = !hideMoney;
-                                          });
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+                                              ),
+                                    IconButton(
+                                      icon: hideMoney
+                                          ? const Icon(Icons.visibility_off,
+                                              color: Colors.white)
+                                          : const Icon(Icons.visibility,
+                                              color: Colors.white),
+                                      onPressed: () {
+                                        setState(() {
+                                          hideMoney = !hideMoney;
+                                        });
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                  )),
+                  ),
+                ),
+              ),
               SizedBox(
                 height: 5.h,
               ),

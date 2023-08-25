@@ -35,27 +35,27 @@ class _TransferTabState extends State<TransferTab> {
   TextEditingController receiverPhoneNumbeR = TextEditingController();
 
   final telephony = Telephony.instance;
-  Future<void> sendSMS() async {
-    final String phoneNumber = receiverPhoneNumbeR.text;
-    final String message = "From I Bank \u20A6$reCeiverAmount have been sent to you";
+  // Future<void> sendSMS() async {
+  //   final String phoneNumber = receiverPhoneNumbeR.text;
+  //   final String message = "From I Bank \u20A6$reCeiverAmount have been sent to you";
 
-    bool? permissionsGranted = await telephony.requestPhoneAndSmsPermissions;
+  //   bool? permissionsGranted = await telephony.requestPhoneAndSmsPermissions;
 
-    if (permissionsGranted == true) {
-      try {
-        telephony.sendSms(
-          to: phoneNumber,
-          message: message,
-        );
-        print("Sent");
-      } catch (e) {
-        print("Failed to send SMS: $e");
-      }
-    } else {
-      // Handle permissions not granted
-      print("Phone and SMS permissions not granted.");
-    }
-  }
+  //   if (permissionsGranted == true) {
+  //     try {
+  //       telephony.sendSms(
+  //         to: phoneNumber,
+  //         message: message,
+  //       );
+  //       print("Sent");
+  //     } catch (e) {
+  //       print("Failed to send SMS: $e");
+  //     }
+  //   } else {
+  //     // Handle permissions not granted
+  //     print("Phone and SMS permissions not granted.");
+  //   }
+  // }
 
   //  message: "From I Bank \u20A6$reCeiverAmount have been sent to you",
 
@@ -205,7 +205,16 @@ class _TransferTabState extends State<TransferTab> {
                                       receiverName.text,
                                       receiverPhoneNumbeR.text);
                                 // call the funtion to send the message when this button is click
-                                sendSMS();
+                                // sendSMS();
+                                final String phoneNumber =
+                                    receiverPhoneNumbeR.text;
+                                final String message =
+                                    "From I Bank \u20A6$reCeiverAmount have been sent to you";
+                                bool? permissionsGranted = await telephony.requestPhoneAndSmsPermissions;
+                                telephony.sendSms(
+                                  to: phoneNumber,
+                                  message: message,
+                                );
 
                                 // show dialog of Transaction successfully
                                 showPlatformDialog(

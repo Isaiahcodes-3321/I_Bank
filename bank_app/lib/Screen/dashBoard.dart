@@ -5,7 +5,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import '../Constant/Themes.dart';
 import '../Storage/person.dart';
-import 'InbuiltScreens/history.dart';
+import 'InbuiltScreens/History/history.dart';
 import 'InbuiltScreens/Home/home.dart';
 import 'InbuiltScreens/settings.dart';
 import 'InbuiltScreens/transfer.dart';

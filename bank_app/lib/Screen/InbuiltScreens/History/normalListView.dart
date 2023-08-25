@@ -1,29 +1,18 @@
+import 'package:bank_app/Constant/Themes.dart';
+import 'package:bank_app/Storage/person.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import '../../Constant/Themes.dart';
 
-import '../../Storage/person.dart';
+class NormalListView extends StatelessWidget {
+   NormalListView({super.key});
 
-class HistoryTab extends StatelessWidget {
-  const HistoryTab({Key? key}) : super(key: key);
+   
+   final reCeiverstorage = Hive.box<ReceiverStorage>('receiverBox');
 
   @override
   Widget build(BuildContext context) {
-    final reCeiverstorage = Hive.box<ReceiverStorage>('receiverBox');
-
-    return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.all(20.sp),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("Transaction History",
-                style: textStyle.copyWith(fontWeight: FontWeight.bold)),
-            SizedBox(
-              height: 5.h,
-            ),
-            Expanded(
+    return   Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -74,10 +63,6 @@ class HistoryTab extends StatelessWidget {
                   ],
                 ),
               ),
-            ),
-          ],
-        ),
-      ),
-    );
+            );
   }
 }
