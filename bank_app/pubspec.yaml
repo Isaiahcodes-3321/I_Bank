@@ -27,9 +27,11 @@ dependencies:
   hive:
   hive_flutter:
   pagination_view: ^2.0.0
-  telephony: ^0.2.0
   connectivity_plus: ^4.0.2
   clickable_list_wheel_view: ^0.2.0
+  pattern_formatter: ^3.0.0
+  # telephony: ^0.2.0
+  
 
 
 

@@ -38,6 +38,15 @@ class _HomeTabState extends State<HomeTab> {
     // Get the user data from the box
     late UserStorage? userFund =
         userStorage.isNotEmpty ? userStorage.getAt(0) : null;
+        // Check if userFund is not null
+    String formattedUserFund = userFund != null
+    // Use a regular expression to match groups of three digits (thousands)
+        ? userFund.funds.toString().replaceAllMapped(
+              RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+              (Match match) => '${match[1]},',
+            )
+        : '';
+
     late UserStorage? userName =
         userStorage.isNotEmpty ? userStorage.getAt(0) : null;
 
@@ -124,7 +133,7 @@ class _HomeTabState extends State<HomeTab> {
                                         ? Text('****', style: textStyleHomePage)
                                         : userFund != null
                                             ? Text(
-                                                "\u20A6${userFund.funds}",
+                                                "\u20A6$formattedUserFund",
                                                 style: textStyleHomePage,
                                               )
                                             : Text(

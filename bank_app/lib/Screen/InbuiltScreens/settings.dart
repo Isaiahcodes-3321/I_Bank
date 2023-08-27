@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../Animations/Dialogs/AddMoreFunds.dart';
 import '../../Constant/Themes.dart';
 import '../../Storage/person.dart';
+import 'package:pattern_formatter/pattern_formatter.dart';
 
 class SettingTab extends StatefulWidget {
   SettingTab({super.key});
@@ -33,7 +34,8 @@ class _SettingTabState extends State<SettingTab> {
 
   // Write data
   Future<void> writeUserData() async {
-    final int fundsValue = int.parse(userFunds.text);
+    String fundsText = userFunds.text.replaceAll(',', '');
+    int fundsValue = int.tryParse(fundsText) ?? 0;
 
     if (userName.text.isNotEmpty) {
       final userStorageKey = 'userName_Funds';
@@ -46,14 +48,14 @@ class _SettingTabState extends State<SettingTab> {
     }
   }
 
-  // Open Hive box for image 
+  // Open Hive box for image
   Future<void> openHiveBoxImage() async {
     userStorageImage = await Hive.openBox<UserStorageImage>('userBoxImage');
   }
 
   final ImagePicker picker = ImagePicker();
   XFile? image;
-  
+
   // get image from user phone storage
   Future<void> getImage() async {
     final XFile? pickedFile =
@@ -117,9 +119,10 @@ class _SettingTabState extends State<SettingTab> {
                                     onTap: () async {
                                       showDialog(
                                         context: context,
-                                         builder: (context) {
-                                           return AddMoreFunds();
-                                         },);
+                                        builder: (context) {
+                                          return AddMoreFunds();
+                                        },
+                                      );
                                     },
                                     child: Padding(
                                       padding:
@@ -160,7 +163,9 @@ class _SettingTabState extends State<SettingTab> {
                                                 content: Text(
                                                     "All data have been deleted successfully",
                                                     style: TextStyle(
-                                                        color: Colors.white,fontFamily: fontFamily)),
+                                                        color: Colors.white,
+                                                        fontFamily:
+                                                            fontFamily)),
                                                 duration: Duration(seconds: 2),
                                               ),
                                             );
@@ -236,8 +241,9 @@ class _SettingTabState extends State<SettingTab> {
                                             snackbarBackgroundColor,
                                         content: Text(
                                             "Image saved Successfully",
-                                            style:
-                                                TextStyle(color: Colors.white,fontFamily: fontFamily)),
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: fontFamily)),
                                         duration: Duration(seconds: 2),
                                       ),
                                     );
@@ -280,6 +286,7 @@ class _SettingTabState extends State<SettingTab> {
                                 TextFormField(
                                   controller: userFunds,
                                   keyboardType: TextInputType.number,
+                                  inputFormatters: [ThousandsFormatter()],
                                   decoration: InputDecoration(
                                       focusColor: Colors.white,
                                       hintText: " Add funds",
@@ -295,7 +302,7 @@ class _SettingTabState extends State<SettingTab> {
                                 ),
                                 TextButton(
                                   onPressed: () async {
-                                    // calling my funtion to write data to hive 
+                                    // calling my funtion to write data to hive
                                     await writeUserData();
                                     // Check if data is added to Hive storage
                                     if (userFunds.text.isEmpty ||
@@ -307,7 +314,8 @@ class _SettingTabState extends State<SettingTab> {
                                               snackbarBackgroundColor,
                                           content: Text("Inputs are required",
                                               style: TextStyle(
-                                                  color: Colors.white,fontFamily: fontFamily)),
+                                                  color: Colors.white,
+                                                  fontFamily: fontFamily)),
                                           duration: Duration(seconds: 2),
                                         ),
                                       );
@@ -323,7 +331,8 @@ class _SettingTabState extends State<SettingTab> {
                                                 snackbarBackgroundColor,
                                             content: Text("Successfully Saved",
                                                 style: TextStyle(
-                                                    color: Colors.white,fontFamily: fontFamily)),
+                                                    color: Colors.white,
+                                                    fontFamily: fontFamily)),
                                             duration: Duration(seconds: 2),
                                           ),
                                         );
@@ -333,7 +342,6 @@ class _SettingTabState extends State<SettingTab> {
                                         userName.clear();
                                       }
                                     }
-                                    // dispose();
                                   },
                                   style: ButtonStyle(
                                     backgroundColor: MaterialStateProperty.all(

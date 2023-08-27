@@ -2,7 +2,6 @@ import 'package:clickable_list_wheel_view/clickable_list_wheel_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
 import '../../../Constant/Themes.dart';
 import '../../../Storage/person.dart';
 
@@ -36,7 +35,7 @@ class HomeTransactionHistory extends StatelessWidget {
               itemHeight: _itemHeight,
               itemCount: reCeiverstorage.length >= 4 ? 4 : reCeiverstorage.length,
               onItemTapCallback: (index) {
-                print("onItemTapCallback index: $index");
+                print("noItemTapCallback index: $index");
                 // Add your onTap logic here
               },
               child: ListWheelScrollView.useDelegate(
@@ -58,10 +57,7 @@ class HomeTransactionHistory extends StatelessWidget {
                     return Padding(
                       padding: EdgeInsets.only(bottom: 2.h),
                       child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(15.sp)),
-                          border: Border.all(width: 5.sp, color: backgroundColor),
-                        ),
+                        decoration: listTileDecoration,
                         child: ListTile(
                           leading: Icon(Icons.person, size: 25.sp),
                           title: Text(
@@ -95,21 +91,25 @@ class HomeTransactionHistory extends StatelessWidget {
             ),
           )
         else
-          Padding(
-            padding: EdgeInsets.only(bottom: 5.h, top: 2.h),
-            child: Center(
-                child: Column(
-              children: [
-                Icon(Icons.cancel_outlined,
-                    color: backgroundColor, size: 35.sp),
-                FittedBox(
-                  child: Text("No transactions were made.",
-                      style: textStyle.copyWith(
-                          fontSize: 25.sp, color: backgroundColor)),
-                )
-              ],
-            )),
-          ), // Display this if there's no data
+          Expanded(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.only(top: 3.h),
+                child: Center(
+                    child: Column(
+                  children: [
+                    Icon(Icons.cancel_outlined,
+                        color: backgroundColor, size: 35.sp),
+                    FittedBox(
+                      child: Text("No transactions were made.",
+                          style: textStyle.copyWith(
+                              fontSize: 25.sp, color: backgroundColor)),
+                    )
+                  ],
+                )),
+              ),
+            ),
+          ), 
       ],
     ));
   }

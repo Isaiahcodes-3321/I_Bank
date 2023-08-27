@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:pattern_formatter/numeric_formatter.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../Animations/Dialogs/Insufficient funds.dart';
@@ -10,7 +11,7 @@ import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:date_format/date_format.dart';
 import '../../Model/receiverDetails.dart';
 import '../../Storage/person.dart';
-import 'package:telephony/telephony.dart';
+// import 'package:telephony/telephony.dart';
 
 class TransferTab extends StatefulWidget {
   const TransferTab({super.key});
@@ -29,35 +30,14 @@ class _TransferTabState extends State<TransferTab> {
     openHiveBox();
   }
 
-// get user input
-  TextEditingController reCeiverAmount = TextEditingController();
-  TextEditingController receiverName = TextEditingController();
-  TextEditingController receiverPhoneNumbeR = TextEditingController();
-
-  final telephony = Telephony.instance;
-  // Future<void> sendSMS() async {
-  //   final String phoneNumber = receiverPhoneNumbeR.text;
-  //   final String message = "From I Bank \u20A6$reCeiverAmount have been sent to you";
-
-  //   bool? permissionsGranted = await telephony.requestPhoneAndSmsPermissions;
-
-  //   if (permissionsGranted == true) {
-  //     try {
-  //       telephony.sendSms(
-  //         to: phoneNumber,
-  //         message: message,
-  //       );
-  //       print("Sent");
-  //     } catch (e) {
-  //       print("Failed to send SMS: $e");
-  //     }
-  //   } else {
-  //     // Handle permissions not granted
-  //     print("Phone and SMS permissions not granted.");
-  //   }
-  // }
-
   //  message: "From I Bank \u20A6$reCeiverAmount have been sent to you",
+
+// get user input
+  TextEditingController receiverName = TextEditingController();
+  TextEditingController reCeiverAmount = TextEditingController();
+  TextEditingController receiverPhoneNumbeR = TextEditingController();
+  late String messageSent =
+      "From I Bank \u20A6 $reCeiverAmount have been sent to you";
 
   // Open Hive box for user storage
   Future<void> openHiveBox() async {
@@ -137,6 +117,7 @@ class _TransferTabState extends State<TransferTab> {
                       ReUsedTextField(
                         controller: reCeiverAmount,
                         keyboardType: TextInputType.number,
+                        inputFormatters: [ThousandsFormatter()],
                         hintText: " Amount",
                         onChanged: (value) {
                           // get the current date and month and time
@@ -188,7 +169,9 @@ class _TransferTabState extends State<TransferTab> {
                             UserStorage? existingData =
                                 userStorage.get(userStorageKey);
 
-                            fundsValue1 = int.parse(reCeiverAmount.text);
+                            String fundsText =
+                                reCeiverAmount.text.replaceAll(',', '');
+                            int fundsValue1 = int.tryParse(fundsText) ?? 0;
                             if (existingData != null) {
                               if (existingData.funds < fundsValue1) {
                                 showPlatformDialog(
@@ -204,17 +187,25 @@ class _TransferTabState extends State<TransferTab> {
                                       reCeiverAmount.text,
                                       receiverName.text,
                                       receiverPhoneNumbeR.text);
-                                // call the funtion to send the message when this button is click
-                                // sendSMS();
-                                final String phoneNumber =
-                                    receiverPhoneNumbeR.text;
-                                final String message =
-                                    "From I Bank \u20A6$reCeiverAmount have been sent to you";
-                                bool? permissionsGranted = await telephony.requestPhoneAndSmsPermissions;
-                                telephony.sendSms(
-                                  to: phoneNumber,
-                                  message: message,
-                                );
+                                // send sms
+                                // try {
+                                //   final Telephony telephony =
+                                //       Telephony.instance;
+                                //   bool? permissionsGranted = await telephony
+                                //       .requestPhoneAndSmsPermissions;
+
+                                //   if (permissionsGranted == true) {
+                                //     telephony.sendSms(
+                                //       to: "+2348124356641",
+                                //       message: messageSent,
+                                //     );
+                                //     print('sent');
+                                //   } else {
+                                //     print(" Permissions not granted");
+                                //   }
+                                // } catch (e) {
+                                //   print("Error sending SMS: $e");
+                                // }
 
                                 // show dialog of Transaction successfully
                                 showPlatformDialog(

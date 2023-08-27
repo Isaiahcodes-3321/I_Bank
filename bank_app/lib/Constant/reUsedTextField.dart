@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter/services.dart'; 
 
 import 'Themes.dart';
 
 class ReUsedTextField extends StatelessWidget {
   ReUsedTextField({
-    super.key,
     required this.controller,
     required this.keyboardType,
     required this.hintText,
     required this.onChanged,
+    this.inputFormatters,
   });
 
-  // passing the required properties from the textfield
   final TextInputType keyboardType;
   final String hintText;
   final TextEditingController controller;
-  final void Function(String) onChanged; 
-
+  final void Function(String) onChanged;
+   final List<TextInputFormatter>? inputFormatters; 
 
   @override
   Widget build(BuildContext context) {
@@ -26,19 +25,20 @@ class ReUsedTextField extends StatelessWidget {
         TextFormField(
           controller: controller,
           keyboardType: keyboardType,
+          inputFormatters: inputFormatters, // Add the formatter here
           decoration: InputDecoration(
             focusColor: Colors.white,
             hintText: hintText,
             hintStyle: TextStyle(
               color: const Color.fromARGB(255, 104, 104, 104),
             ),
-            focusedBorder: outlineInputBorder,
+           focusedBorder: outlineInputBorder,
             enabledBorder: outlineInputBorder,
             fillColor: Colors.white,
           ),
           onChanged: onChanged,
         ),
-        SizedBox(height: 2.h),
+        SizedBox(height: 10), // Adjust the spacing as needed
       ],
     );
   }

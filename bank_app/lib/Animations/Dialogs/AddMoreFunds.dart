@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../Constant/Themes.dart';
 import '../../Constant/reUsedTextField.dart';
+import 'package:pattern_formatter/pattern_formatter.dart';
 import '../../Storage/person.dart';
 
 class AddMoreFunds extends StatefulWidget {
@@ -16,10 +17,12 @@ class _AddMoreFundsState extends State<AddMoreFunds> {
   Widget build(BuildContext context) {
     var addAmount = TextEditingController();
 
-  //  update the user Money
+    //  update the user Money
     Future<void> writeUserDataNewMoney() async {
+      String addNewAmount = addAmount.text.replaceAll(',', '');
+      int fundsValue1 = int.tryParse(addNewAmount) ?? 0;
 
-      int fundsValue1 = int.parse(addAmount.text);
+      // int fundsValue1 = int.parse(addAmount.text);
 
       if (addAmount.text.isNotEmpty) {
         final userStorageKey = 'userName_Funds';
@@ -52,6 +55,7 @@ class _AddMoreFundsState extends State<AddMoreFunds> {
                 child: ReUsedTextField(
                   controller: addAmount,
                   keyboardType: TextInputType.number,
+                  inputFormatters: [ThousandsFormatter()],
                   hintText: " Add Money",
                   onChanged: (value) {},
                 ),
@@ -67,7 +71,8 @@ class _AddMoreFundsState extends State<AddMoreFunds> {
                       SnackBar(
                         backgroundColor: snackbarBackgroundColor,
                         content: Text("Money added successfully",
-                            style: TextStyle(color: Colors.white,fontFamily: fontFamily)),
+                            style: TextStyle(
+                                color: Colors.white, fontFamily: fontFamily)),
                         duration: Duration(seconds: 2),
                       ),
                     );

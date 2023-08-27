@@ -27,12 +27,7 @@ class NormalListView extends StatelessWidget {
                         return Padding(
                           padding: EdgeInsets.only(bottom: 2.h),
                           child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.sp)),
-                              border: Border.all(
-                                  width: 3.sp, color: backgroundColor),
-                            ),
+                            decoration: listTileDecoration,
                             child: ListTile(
                               leading: Icon(Icons.person, size: 25.sp),
                               title: Text(
