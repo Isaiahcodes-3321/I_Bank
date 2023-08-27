@@ -62,7 +62,7 @@ class _TransferTabState extends State<TransferTab> {
 //  update the user Money
   late int fundsValue1;
   Future<void> subtractMoney() async {
-    fundsValue1 = int.parse(reCeiverAmount.text);
+    // fundsValue1 = int.parse(reCeiverAmount.text);
 
     if (reCeiverAmount.text.isNotEmpty) {
       String userStorageKey = 'userName_Funds';
@@ -169,9 +169,11 @@ class _TransferTabState extends State<TransferTab> {
                             UserStorage? existingData =
                                 userStorage.get(userStorageKey);
 
+                            // fundsValue1 = int.parse(reCeiverAmount.text);
                             String fundsText =
                                 reCeiverAmount.text.replaceAll(',', '');
-                            int fundsValue1 = int.tryParse(fundsText) ?? 0;
+                             fundsValue1 = int.tryParse(fundsText) ?? 0;
+
                             if (existingData != null) {
                               if (existingData.funds < fundsValue1) {
                                 showPlatformDialog(
