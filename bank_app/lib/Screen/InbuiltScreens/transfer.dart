@@ -62,8 +62,7 @@ class _TransferTabState extends State<TransferTab> {
 //  update the user Money
   late int fundsValue1;
   Future<void> subtractMoney() async {
-    // fundsValue1 = int.parse(reCeiverAmount.text);
-
+    
     if (reCeiverAmount.text.isNotEmpty) {
       String userStorageKey = 'userName_Funds';
 
@@ -169,7 +168,6 @@ class _TransferTabState extends State<TransferTab> {
                             UserStorage? existingData =
                                 userStorage.get(userStorageKey);
 
-                            // fundsValue1 = int.parse(reCeiverAmount.text);
                             String fundsText =
                                 reCeiverAmount.text.replaceAll(',', '');
                              fundsValue1 = int.tryParse(fundsText) ?? 0;
