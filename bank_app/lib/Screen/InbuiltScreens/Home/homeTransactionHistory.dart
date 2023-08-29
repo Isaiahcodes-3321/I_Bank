@@ -33,7 +33,8 @@ class HomeTransactionHistory extends StatelessWidget {
             child: ClickableListWheelScrollView(
               scrollController: _scrollController,
               itemHeight: _itemHeight,
-              itemCount: reCeiverstorage.length >= 4 ? 4 : reCeiverstorage.length,
+              itemCount:
+                  reCeiverstorage.length >= 4 ? 4 : reCeiverstorage.length,
               onItemTapCallback: (index) {
                 print("noItemTapCallback index: $index");
                 // Add your onTap logic here
@@ -53,7 +54,7 @@ class HomeTransactionHistory extends StatelessWidget {
                     final reversedIndex = reCeiverstorage.length - index - 1;
                     final receiver =
                         reCeiverstorage.getAt(reversedIndex) as ReceiverStorage;
-          
+
                     return Padding(
                       padding: EdgeInsets.only(bottom: 2.h),
                       child: Container(
@@ -74,11 +75,22 @@ class HomeTransactionHistory extends StatelessWidget {
                               fontSize: 17.sp,
                             ),
                           ),
-                          trailing: FittedBox(
-                            child: Text(
-                              "Date ${receiver.dateSent} \nTime ${receiver.timeSent}",
-                              style: textStyle.copyWith(fontSize: 15.sp),
-                            ),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              FittedBox(
+                                child: Text(
+                                  "Date ${receiver.dateSent} \nTime ${receiver.timeSent}",
+                                  style: textStyle.copyWith(fontSize: 15.sp),
+                                ),
+                              ),
+                              SizedBox(width: 3.w),
+                              Align(
+                                alignment: Alignment.topRight,
+                                child: Icon(Icons.arrow_outward,
+                                    size: 22.sp, color: Colors.green),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -109,7 +121,7 @@ class HomeTransactionHistory extends StatelessWidget {
                 )),
               ),
             ),
-          ), 
+          ),
       ],
     ));
   }

@@ -21,8 +21,10 @@ class HistoryTab extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Transaction History",
-                style: textStyle.copyWith(fontWeight: FontWeight.bold)),
+            FittedBox(
+              child: Text("Transaction History",
+                  style: textStyle.copyWith(fontWeight: FontWeight.bold)),
+            ),
             SizedBox(
               height: 5.h,
             ),

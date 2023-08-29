@@ -145,23 +145,6 @@ class _Login_PageState extends State<Login_Page> {
                                             enabledBorder: outlineInputBorder,
                                             fillColor: Colors.white),
                                       ),
-                                      sizedBox,
-                                      Align(
-                                        alignment: Alignment.bottomLeft,
-                                        child: GestureDetector(
-                                          onTap: () {
-                                          },
-                                          child: Text('Forgot Password?',
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 18.sp,
-                                                  fontWeight: FontWeight.w800,
-                                                  fontFamily: fontFamily,
-                                                  decoration:
-                                                      TextDecoration.underline,
-                                                  decorationThickness: 3.sp)),
-                                        ),
-                                      ),
                                     ],
                                   ),
                                 ),
