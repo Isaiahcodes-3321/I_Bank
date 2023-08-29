@@ -187,26 +187,7 @@ class _TransferTabState extends State<TransferTab> {
                                       reCeiverAmount.text,
                                       receiverName.text,
                                       receiverPhoneNumbeR.text);
-                                // send sms
-                                // try {
-                                //   final Telephony telephony =
-                                //       Telephony.instance;
-                                //   bool? permissionsGranted = await telephony
-                                //       .requestPhoneAndSmsPermissions;
-
-                                //   if (permissionsGranted == true) {
-                                //     telephony.sendSms(
-                                //       to: "+2348124356641",
-                                //       message: messageSent,
-                                //     );
-                                //     print('sent');
-                                //   } else {
-                                //     print(" Permissions not granted");
-                                //   }
-                                // } catch (e) {
-                                //   print("Error sending SMS: $e");
-                                // }
-
+                               
                                 // show dialog of Transaction successfully
                                 showPlatformDialog(
                                   context: context,
@@ -227,6 +208,13 @@ class _TransferTabState extends State<TransferTab> {
                                 receiverName.clear();
                                 receiverPhoneNumbeR.clear();
                               }
+                            }else{
+                                showPlatformDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return (Insufficientfunds());
+                                  },
+                                );
                             }
                           }
                         },
