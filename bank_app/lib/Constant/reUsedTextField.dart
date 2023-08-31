@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'; 
-
 import 'Themes.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ReUsedTextField extends StatelessWidget {
   ReUsedTextField({
@@ -25,7 +25,7 @@ class ReUsedTextField extends StatelessWidget {
         TextFormField(
           controller: controller,
           keyboardType: keyboardType,
-          inputFormatters: inputFormatters, // Add the formatter here
+          inputFormatters: inputFormatters, 
           decoration: InputDecoration(
             focusColor: Colors.white,
             hintText: hintText,
@@ -38,7 +38,7 @@ class ReUsedTextField extends StatelessWidget {
           ),
           onChanged: onChanged,
         ),
-        SizedBox(height: 10), // Adjust the spacing as needed
+        SizedBox(height: 2.h), 
       ],
     );
   }

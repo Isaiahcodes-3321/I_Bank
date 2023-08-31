@@ -32,7 +32,7 @@ Timer? _timer;
    return Scaffold(
       body: SizedBox(height: double.infinity, width: double.infinity,
       child: Container( color: Color.fromRGBO(101, 0, 56, 1.0),
-        child: Center(child: Image.asset("images/logo.png")),)),
+        child: Center(child: Image.asset("images/IbankLogo.PNG")),)),
     );
   }
 }
