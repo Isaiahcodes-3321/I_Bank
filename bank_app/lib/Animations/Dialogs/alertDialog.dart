@@ -45,12 +45,17 @@ class ShowDialog extends StatelessWidget {
                 style: textstyle.copyWith(),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 3.h),
+              SizedBox(height: 5.h),
               Consumer<DateAndTime>(builder: (context, model, child) {
                 var date = model.date;
-                var time = model.time;
-                return Text("Date  $date,  $time",
-                    style: textstyle.copyWith(fontSize: 18.sp));
+                return Text("Date  $date",
+                    style: textstyle.copyWith(
+                      fontSize: 18.sp,
+                      decoration: TextDecoration.underline,
+                      decorationThickness: 10.sp,
+                      decorationStyle: TextDecorationStyle.wavy,
+                      
+                    ));
               })
             ],
           );

@@ -21,11 +21,9 @@ class ReceiverDetails extends ChangeNotifier {
 
 class DateAndTime extends ChangeNotifier{
   String date = '';
-  String time = '';
 
-  void timeandDATE( String date,time){
+  void timeandDATE( String date){
     this.date = date;
-    this.time = time;
     notifyListeners();
   }
 }
