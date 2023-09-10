@@ -43,6 +43,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (context) => DateAndTime(),),
         ChangeNotifierProvider(create: (_) => ReceiverDetails()),
       ],
       child: ResponsiveSizer(

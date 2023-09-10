@@ -36,8 +36,6 @@ class _TransferTabState extends State<TransferTab> {
   TextEditingController receiverName = TextEditingController();
   TextEditingController reCeiverAmount = TextEditingController();
   TextEditingController receiverPhoneNumbeR = TextEditingController();
-  late String messageSent =
-      "From I Bank \u20A6 $reCeiverAmount have been sent to you";
 
   // Open Hive box for user storage
   Future<void> openHiveBox() async {
@@ -62,7 +60,6 @@ class _TransferTabState extends State<TransferTab> {
 //  update the user Money
   late int fundsValue1;
   Future<void> subtractMoney() async {
-    
     if (reCeiverAmount.text.isNotEmpty) {
       String userStorageKey = 'userName_Funds';
 
@@ -170,7 +167,7 @@ class _TransferTabState extends State<TransferTab> {
 
                             String fundsText =
                                 reCeiverAmount.text.replaceAll(',', '');
-                             fundsValue1 = int.tryParse(fundsText) ?? 0;
+                            fundsValue1 = int.tryParse(fundsText) ?? 0;
 
                             if (existingData != null) {
                               if (existingData.funds < fundsValue1) {
@@ -181,13 +178,17 @@ class _TransferTabState extends State<TransferTab> {
                                   },
                                 );
                               } else {
+                                 // send data to user data and time provider
                                 Provider.of<ReceiverDetails>(context,
                                     listen: false)
                                   ..updateMoneySent(
                                       reCeiverAmount.text,
                                       receiverName.text,
                                       receiverPhoneNumbeR.text);
-                               
+                                // send data to user data and time provider
+                                Provider.of<DateAndTime>(context, listen: false)
+                                  ..timeandDATE(date, time);
+
                                 // show dialog of Transaction successfully
                                 showPlatformDialog(
                                   context: context,
@@ -208,13 +209,13 @@ class _TransferTabState extends State<TransferTab> {
                                 receiverName.clear();
                                 receiverPhoneNumbeR.clear();
                               }
-                            }else{
-                                showPlatformDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return (Insufficientfunds());
-                                  },  
-                                );
+                            } else {
+                              showPlatformDialog(
+                                context: context,
+                                builder: (context) {
+                                  return (Insufficientfunds());
+                                },
+                              );
                             }
                           }
                         },

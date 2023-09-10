@@ -11,12 +11,16 @@ class ShowDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BasicDialogAlert(
-      
+    var textstyle = textStyle.copyWith(
+        fontSize: 20.sp, color: Color.fromRGBO(31, 0, 17, 1));
+    return AlertDialog(
       title: FittedBox(
-        child: Column( crossAxisAlignment: CrossAxisAlignment.center,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-             Icon(Icons.gpp_good_outlined,color: backgroundColor,size: 41.sp),
+            SizedBox(height: 10.h),
+            Icon(Icons.gpp_good_outlined, color: Colors.green, size: 41.sp),
+            SizedBox(height: 5.h),
             Text("Transfer Successful!",
                 style: textStyle.copyWith(
                     fontSize: 23.sp, color: Color.fromRGBO(31, 0, 17, 1))),
@@ -28,9 +32,27 @@ class ShowDialog extends StatelessWidget {
         try {
           var money = model.sendMoney;
           var receiverName = model.receiverName;
-          return Text(
-            'You sent \u20A6$money to $receiverName',
-            style: TextStyle(color: Color.fromRGBO(25, 0, 14, 1),fontSize: 20.sp,),
+          return Column(
+            children: [
+              SizedBox(height: 5.h),
+              Text(
+                '\u20A6$money',
+                style: TextStyle(fontSize: 23.sp),
+              ),
+              SizedBox(height: 3.h),
+              Text(
+                'Have been sent to $receiverName',
+                style: textstyle.copyWith(),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 3.h),
+              Consumer<DateAndTime>(builder: (context, model, child) {
+                var date = model.date;
+                var time = model.time;
+                return Text("Date  $date,  $time",
+                    style: textstyle.copyWith(fontSize: 18.sp));
+              })
+            ],
           );
         } catch (e) {
           print("Error in Consumer: $e");
@@ -39,7 +61,7 @@ class ShowDialog extends StatelessWidget {
       }),
       actions: <Widget>[
         BasicDialogAction(
-          title: Text("OK", style: textStyle.copyWith(fontSize: 18.sp)),
+          title: Text("OK", style: textStyle.copyWith(fontSize: 20.sp)),
           onPressed: () {
             Navigator.pop(context);
           },
