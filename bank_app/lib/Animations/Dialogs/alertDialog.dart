@@ -46,7 +46,7 @@ class ShowDialog extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 5.h),
-              Consumer<DateAndTime>(builder: (context, model, child) {
+              Consumer<Date>(builder: (context, model, child) {
                 var date = model.date;
                 return Text("Date  $date",
                     style: textstyle.copyWith(

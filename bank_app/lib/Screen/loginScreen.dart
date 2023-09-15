@@ -15,7 +15,6 @@ class _Login_PageState extends State<Login_Page> {
   bool hidepassword = true;
   var getUserName = TextEditingController();
   final formKey = GlobalKey<FormState>();
-  var fontFamily = 'BodoniModa-VariableFont_opsz,wght';
 
 //  input sizedBox
   var sizedBox = SizedBox(height: 3.h);

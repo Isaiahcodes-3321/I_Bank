@@ -186,8 +186,8 @@ class _TransferTabState extends State<TransferTab> {
                                       receiverName.text,
                                       receiverPhoneNumbeR.text);
                                 // send data to user data and time provider
-                                Provider.of<DateAndTime>(context, listen: false)
-                                  ..timeandDATE(date);
+                                Provider.of<Date>(context, listen: false)
+                                  ..dATE(date);
 
                                 // show dialog of Transaction successfully
                                 showPlatformDialog(
