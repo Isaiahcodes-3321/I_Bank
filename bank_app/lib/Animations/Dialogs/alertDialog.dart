@@ -52,7 +52,7 @@ class ShowDialog extends StatelessWidget {
                     style: textstyle.copyWith(
                       fontSize: 18.sp,
                       decoration: TextDecoration.underline,
-                      decorationThickness: 10.sp,
+                      decorationThickness: 5.sp,
                       decorationStyle: TextDecorationStyle.wavy,
                       
                     ));
