@@ -14,7 +14,7 @@ class HomeTab extends StatefulWidget {
 class _HomeTabState extends State<HomeTab> {
   bool hideMoney = false;
 
-  List<Color> _colors = [backgroundColor, Color.fromRGBO(175, 20, 131, 1)];
+  final List<Color> _colors = [backgroundColor,  const Color.fromRGBO(175, 20, 131, 1)];
   int _currentColorIndex = 0;
 
   @override
@@ -25,7 +25,7 @@ class _HomeTabState extends State<HomeTab> {
 
 // animation to the Card background
   void _startAnimation() {
-    Future.delayed(Duration(seconds: 4), () {
+    Future.delayed(const Duration(seconds: 4), () {
       setState(() {
         _currentColorIndex = (_currentColorIndex + 1) % _colors.length;
       });
@@ -73,16 +73,16 @@ class _HomeTabState extends State<HomeTab> {
                 width: double.infinity,
                 child: Card(
                   elevation: 20,
-                  color: Color.fromARGB(128, 230, 229, 229),
+                  color: const Color.fromARGB(128, 230, 229, 229),
                   child: AnimatedContainer(
                     decoration: BoxDecoration(
                       color: _colors[_currentColorIndex],
                       borderRadius: BorderRadius.circular(14.sp),
                     ),
-                    duration: Duration(seconds: 1),
+                    duration: const Duration(seconds: 1),
                     alignment: Alignment.center,
                     child: AnimatedOpacity(
-                      duration: Duration(milliseconds: 900),
+                      duration: const Duration(milliseconds: 900),
                       opacity: _currentColorIndex == 0 ? 1.0 : 1.0,
                       child: Padding(
                         padding: EdgeInsets.all(17.sp),
@@ -182,7 +182,7 @@ class _HomeTabState extends State<HomeTab> {
                       decoration: BoxDecoration(
                           border:
                               Border.all(color: backgroundColor, width: 5.sp),
-                          borderRadius: BorderRadius.all(Radius.circular(8))),
+                          borderRadius: const BorderRadius.all(Radius.circular(8))),
                       child: Padding(
                           padding: EdgeInsets.all(13.sp),
                           child: Center(

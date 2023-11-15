@@ -18,7 +18,7 @@ class NormalListView extends StatelessWidget {
             ListView.builder(
               shrinkWrap: true,
               reverse: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: reCeiverstorage.length,
               itemBuilder: (context, index) {
                 final receiver =

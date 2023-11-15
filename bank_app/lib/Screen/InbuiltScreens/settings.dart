@@ -10,7 +10,7 @@ import '../../Storage/person.dart';
 import 'package:pattern_formatter/pattern_formatter.dart';
 
 class SettingTab extends StatefulWidget {
-  SettingTab({super.key});
+  const SettingTab({super.key});
 
   @override
   State<SettingTab> createState() => _SettingTabState();
@@ -38,7 +38,7 @@ class _SettingTabState extends State<SettingTab> {
     int fundsValue = int.tryParse(fundsText) ?? 0;
 
     if (userName.text.isNotEmpty) {
-      final userStorageKey = 'userName_Funds';
+      const userStorageKey = 'userName_Funds';
       final userStorageData = UserStorage(
         name: userName.text,
         funds: fundsValue,
@@ -72,7 +72,7 @@ class _SettingTabState extends State<SettingTab> {
     if (imagePath == null) return;
     Uint8List imageBytes = await imagePath.readAsBytes();
 
-    final userStorageKey1 = 'userNameImage';
+    const userStorageKey1 = 'userNameImage';
     final userStorageImage1 = UserStorageImage(
       userImage: imageBytes,
     );
@@ -103,11 +103,11 @@ class _SettingTabState extends State<SettingTab> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
+            SizedBox(
               width: double.infinity,
               child: Column(
                 children: [
-                  Container(
+                  SizedBox(
                     width: double.infinity,
                     child: Align(
                       alignment: Alignment.topRight,
@@ -120,7 +120,7 @@ class _SettingTabState extends State<SettingTab> {
                                       showDialog(
                                         context: context,
                                         builder: (context) {
-                                          return AddMoreFunds();
+                                          return const AddMoreFunds();
                                         },
                                       );
                                     },
@@ -146,7 +146,7 @@ class _SettingTabState extends State<SettingTab> {
                                     children: [
                                       Padding(
                                           padding: EdgeInsets.only(top: 1.h),
-                                          child: Divider(
+                                          child: const Divider(
                                             color: Colors.black,
                                           )),
                                       Padding(
@@ -166,7 +166,7 @@ class _SettingTabState extends State<SettingTab> {
                                                         color: Colors.white,
                                                         fontFamily:
                                                             fontFamily)),
-                                                duration: Duration(seconds: 2),
+                                                duration: const Duration(seconds: 2),
                                               ),
                                             );
                                           },
@@ -201,7 +201,7 @@ class _SettingTabState extends State<SettingTab> {
                                       radius: 50.sp,
                                     )
                                   : Container(
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         color: Colors.white,
                                         shape: BoxShape.circle,
                                       ),
@@ -244,7 +244,7 @@ class _SettingTabState extends State<SettingTab> {
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontFamily: fontFamily)),
-                                        duration: Duration(seconds: 2),
+                                        duration: const Duration(seconds: 2),
                                       ),
                                     );
                                   },
@@ -273,8 +273,8 @@ class _SettingTabState extends State<SettingTab> {
                                   decoration: InputDecoration(
                                       focusColor: Colors.white,
                                       hintText: " Set user name",
-                                      hintStyle: TextStyle(
-                                          color: const Color.fromARGB(
+                                      hintStyle: const TextStyle(
+                                          color: Color.fromARGB(
                                               255, 104, 104, 104)),
                                       focusedBorder: outlineInputBorder,
                                       enabledBorder: outlineInputBorder,
@@ -290,8 +290,8 @@ class _SettingTabState extends State<SettingTab> {
                                   decoration: InputDecoration(
                                       focusColor: Colors.white,
                                       hintText: " Add funds",
-                                      hintStyle: TextStyle(
-                                          color: const Color.fromARGB(
+                                      hintStyle: const TextStyle(
+                                          color: Color.fromARGB(
                                               255, 104, 104, 104)),
                                       focusedBorder: outlineInputBorder,
                                       enabledBorder: outlineInputBorder,
@@ -316,7 +316,7 @@ class _SettingTabState extends State<SettingTab> {
                                               style: TextStyle(
                                                   color: Colors.white,
                                                   fontFamily: fontFamily)),
-                                          duration: Duration(seconds: 2),
+                                          duration: const Duration(seconds: 2),
                                         ),
                                       );
                                     } else {
@@ -333,7 +333,7 @@ class _SettingTabState extends State<SettingTab> {
                                                 style: TextStyle(
                                                     color: Colors.white,
                                                     fontFamily: fontFamily)),
-                                            duration: Duration(seconds: 2),
+                                            duration: const Duration(seconds: 2),
                                           ),
                                         );
                                         print(

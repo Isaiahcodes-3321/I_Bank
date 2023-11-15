@@ -29,7 +29,7 @@ class AnimatedListview extends StatelessWidget {
           child: ListWheelScrollView.useDelegate(
             controller: _scrollController,
             itemExtent: _itemHeight,
-            physics: FixedExtentScrollPhysics(),
+            physics: const FixedExtentScrollPhysics(),
             overAndUnderCenterOpacity: 0.4,
             perspective: 0.003,
             onSelectedItemChanged: (index) {

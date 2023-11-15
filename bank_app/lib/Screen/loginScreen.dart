@@ -4,14 +4,14 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import '../Animations/loadtoDashboard.dart';
 import '../Constant/Themes.dart';
 
-class Login_Page extends StatefulWidget {
-  Login_Page({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<Login_Page> createState() => _Login_PageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _Login_PageState extends State<Login_Page> {
+class _LoginPageState extends State<LoginPage> {
   bool hidepassword = true;
   var getUserName = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -47,17 +47,15 @@ class _Login_PageState extends State<Login_Page> {
           height: double.infinity,
           width: double.infinity,
           child: Container(
-            color: Color.fromRGBO(101, 0, 56, 1.0),
+            color: const Color.fromRGBO(101, 0, 56, 1.0),
             child: Stack(children: [
               Row(
                 children: [
                   Expanded(flex: 1, child: Container()),
                   Expanded(
                       flex: 2,
-                      child: Container(
-                        child: Image.asset("images/logoDesign.png",
-                            fit: BoxFit.cover),
-                      ))
+                      child: Image.asset("images/logoDesign.png",
+                          fit: BoxFit.cover))
                 ],
               ),
               SizedBox(
@@ -85,7 +83,7 @@ class _Login_PageState extends State<Login_Page> {
                                   child: Column(
                                     children: [
                                       TextFormField(
-                                        style: TextStyle(color: Colors.white),
+                                        style: const TextStyle(color: Colors.white),
                                         validator: (value) {
                                           if (value == null || value.isEmpty) {
                                             return 'Please enter phone number';
@@ -94,12 +92,12 @@ class _Login_PageState extends State<Login_Page> {
                                         },
                                         keyboardType: TextInputType.number,
                                         decoration: InputDecoration(
-                                          errorStyle: TextStyle(color: Colors.white),
+                                          errorStyle: const TextStyle(color: Colors.white),
                                             focusColor: Colors.white,
                                             hintText: " Phone number",
                                             hintStyle:
-                                                TextStyle(color: Colors.grey),
-                                            prefixIcon: Icon(
+                                                const TextStyle(color: Colors.grey),
+                                            prefixIcon: const Icon(
                                                 Icons.man_4_outlined,
                                                 color: Colors.white),
                                             focusedBorder: outlineInputBorder,
@@ -115,14 +113,14 @@ class _Login_PageState extends State<Login_Page> {
                                           }
                                           return null;
                                         },
-                                        style: TextStyle(color: Colors.white),
+                                        style: const TextStyle(color: Colors.white),
                                         decoration: InputDecoration(
                                           
-                                          errorStyle: TextStyle(color: Colors.white),
+                                          errorStyle: const TextStyle(color: Colors.white),
                                             hintText: "Password",
                                             hintStyle:
-                                                TextStyle(color: Colors.grey),
-                                            prefixIcon: Icon(
+                                                const TextStyle(color: Colors.grey),
+                                            prefixIcon: const Icon(
                                                 Icons.lock_person_rounded,
                                                 color: Colors.white),
                                             suffixIcon: IconButton(
@@ -161,7 +159,7 @@ class _Login_PageState extends State<Login_Page> {
             ]),
           ),
         ),
-        floatingActionButton: Container(
+        floatingActionButton: SizedBox(
           height: 16.h,
           width: 16.w,
           child: FittedBox(
@@ -176,9 +174,9 @@ class _Login_PageState extends State<Login_Page> {
                   );
                 }
               },
+              backgroundColor: Colors.white,
               child: Text('Login',
                   style: textStyle.copyWith(fontSize: 16.sp)),
-              backgroundColor: Colors.white,
             ),
           ),
         ),

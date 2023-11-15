@@ -156,7 +156,7 @@ class _TransferTabState extends State<TransferTab> {
                                           color: Colors.white,
                                           fontFamily: fontFamily)),
                                 ),
-                                duration: Duration(seconds: 2),
+                                duration: const Duration(seconds: 2),
                               ),
                             );
                           } else {
@@ -174,7 +174,7 @@ class _TransferTabState extends State<TransferTab> {
                                 showPlatformDialog(
                                   context: context,
                                   builder: (context) {
-                                    return (Insufficientfunds());
+                                    return (const Insufficientfunds());
                                   },
                                 );
                               } else {
@@ -193,7 +193,7 @@ class _TransferTabState extends State<TransferTab> {
                                 showPlatformDialog(
                                   context: context,
                                   builder: (context) {
-                                    return (ShowDialog());
+                                    return (const ShowDialog());
                                   },
                                 );
 
@@ -213,7 +213,7 @@ class _TransferTabState extends State<TransferTab> {
                               showPlatformDialog(
                                 context: context,
                                 builder: (context) {
-                                  return (Insufficientfunds());
+                                  return (const Insufficientfunds());
                                 },
                               );
                             }

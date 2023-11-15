@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
       ],
       child: ResponsiveSizer(
         builder: (context, orientation, screenType) {
-          return MaterialApp(
+          return const MaterialApp(
             debugShowCheckedModeBanner: false,
             home: Scaffold(
               body: SafeArea(child: SplashScreen()),

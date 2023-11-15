@@ -12,7 +12,7 @@ class ShowDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var textstyle = textStyle.copyWith(
-        fontSize: 20.sp, color: Color.fromRGBO(31, 0, 17, 1));
+        fontSize: 20.sp, color: const Color.fromRGBO(31, 0, 17, 1));
     return AlertDialog(
       title: FittedBox(
         child: Column(
@@ -23,7 +23,7 @@ class ShowDialog extends StatelessWidget {
             SizedBox(height: 5.h),
             Text("Transfer Successful!",
                 style: textStyle.copyWith(
-                    fontSize: 23.sp, color: Color.fromRGBO(31, 0, 17, 1))),
+                    fontSize: 23.sp, color: const Color.fromRGBO(31, 0, 17, 1))),
           ],
         ),
       ),
@@ -61,7 +61,7 @@ class ShowDialog extends StatelessWidget {
           );
         } catch (e) {
           print("Error in Consumer: $e");
-          return Text("Error occurred");
+          return const Text("Error occurred");
         }
       }),
       actions: <Widget>[

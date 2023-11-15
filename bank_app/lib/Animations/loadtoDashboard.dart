@@ -12,12 +12,13 @@ class LoadDasboard extends StatefulWidget {
 }
 
 class _LoadDasboardState extends State<LoadDasboard> {
+  @override
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => DashBoardscreeen()),
+        MaterialPageRoute(builder: (context) => const DashBoardscreeen()),
       );
     });
   }
@@ -26,7 +27,7 @@ class _LoadDasboardState extends State<LoadDasboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Color.fromRGBO(101, 0, 56, 1.0),
+        color: const Color.fromRGBO(101, 0, 56, 1.0),
         width: double.infinity,
         height: double.infinity,
         child: Center(

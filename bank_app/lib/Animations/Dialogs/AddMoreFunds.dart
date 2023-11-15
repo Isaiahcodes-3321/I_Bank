@@ -25,7 +25,7 @@ class _AddMoreFundsState extends State<AddMoreFunds> {
       // int fundsValue1 = int.parse(addAmount.text);
 
       if (addAmount.text.isNotEmpty) {
-        final userStorageKey = 'userName_Funds';
+        const userStorageKey = 'userName_Funds';
 
         // Check if the key exists in the box
         if (userStorage.containsKey(userStorageKey)) {
@@ -42,56 +42,54 @@ class _AddMoreFundsState extends State<AddMoreFunds> {
     }
 
     return AlertDialog(
-      content: Container(
-          // height: 10.h,
-          child: SingleChildScrollView(
+      content: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(5.sp),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                flex: 2,
-                child: ReUsedTextField(
-                  controller: addAmount,
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [ThousandsFormatter()],
-                  hintText: " Add Money",
-                  onChanged: (value) {},
-                ),
-              ),
-              Flexible(
-                child: TextButton(
-                  onPressed: () async {
-                    setState(() {
-                      writeUserDataNewMoney();
-                    });
-                    Navigator.pop(context);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        backgroundColor: snackbarBackgroundColor,
-                        content: Text("Money added successfully",
-                            style: TextStyle(
-                                color: Colors.white, fontFamily: fontFamily)),
-                        duration: Duration(seconds: 2),
-                      ),
-                    );
-                  },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(backgroundColor),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(5.sp),
-                    child: Text('Save',
-                        style: textStyle.copyWith(
-                            fontSize: 15.sp, color: Colors.white)),
-                  ),
-                ),
-              ),
-            ],
+      padding: EdgeInsets.all(5.sp),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            flex: 2,
+            child: ReUsedTextField(
+              controller: addAmount,
+              keyboardType: TextInputType.number,
+              inputFormatters: [ThousandsFormatter()],
+              hintText: " Add Money",
+              onChanged: (value) {},
+            ),
           ),
+          Flexible(
+            child: TextButton(
+              onPressed: () async {
+                setState(() {
+                  writeUserDataNewMoney();
+                });
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    backgroundColor: snackbarBackgroundColor,
+                    content: Text("Money added successfully",
+                        style: TextStyle(
+                            color: Colors.white, fontFamily: fontFamily)),
+                    duration: const Duration(seconds: 2),
+                  ),
+                );
+              },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(backgroundColor),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(5.sp),
+                child: Text('Save',
+                    style: textStyle.copyWith(
+                        fontSize: 15.sp, color: Colors.white)),
+              ),
+            ),
+          ),
+        ],
+      ),
         ),
-      )),
+      ),
     );
   }
 }

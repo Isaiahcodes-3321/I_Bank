@@ -42,7 +42,7 @@ class HomeTransactionHistory extends StatelessWidget {
               child: ListWheelScrollView.useDelegate(
                 controller: _scrollController,
                 itemExtent: _itemHeight,
-                physics: FixedExtentScrollPhysics(),
+                physics: const FixedExtentScrollPhysics(),
                 overAndUnderCenterOpacity: 0.4,
                 perspective: 0.010,
                 onSelectedItemChanged: (index) {

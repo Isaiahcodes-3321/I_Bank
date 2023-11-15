@@ -1,19 +1,16 @@
 name: bank_app
 description: A new Flutter project.
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.6 <4.0.0'
-
+  sdk: ">=3.0.6 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-
 
   cupertino_icons: ^1.0.2
   provider: ^6.0.5
@@ -30,10 +27,12 @@ dependencies:
   connectivity_plus: ^4.0.2
   clickable_list_wheel_view: ^0.2.0
   pattern_formatter: ^3.0.0
+  flutter_launcher_icons: ^0.13.1
   # telephony: ^0.2.0
-  
-
-
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "images/logoImage/oneLogo.png"
 
 dev_dependencies:
   flutter_test:
@@ -43,17 +42,13 @@ dev_dependencies:
   hive_generator:
   build_runner:
 
-
 flutter:
-
- 
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
   assets:
-     - images/
-     - images/dashboardImages/
-
+    - images/
+    - images/dashboardImages/
 
   fonts:
     - family: BodoniModa-VariableFont_opsz,wght

@@ -8,7 +8,7 @@ import '../../../Storage/person.dart';
 import 'animationListView.dart';
 
 class HistoryTab extends StatelessWidget {
-  HistoryTab({Key? key}) : super(key: key);
+  const HistoryTab({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

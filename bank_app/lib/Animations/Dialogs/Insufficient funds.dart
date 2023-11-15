@@ -25,7 +25,7 @@ class Insufficientfunds extends StatelessWidget {
       // getting the current Transaction details from Providder state management
       content: Text("Insufficient funds. Please try again.",
           style: textStyle.copyWith(
-              fontSize: 20.sp, color: Color.fromRGBO(25, 0, 14, 1)),
+              fontSize: 20.sp, color: const Color.fromRGBO(25, 0, 14, 1)),
           textAlign: TextAlign.center),
       actions: <Widget>[
         BasicDialogAction(

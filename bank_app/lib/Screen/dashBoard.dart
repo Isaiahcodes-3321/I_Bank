@@ -18,6 +18,7 @@ class DashBoardscreeen extends StatefulWidget {
 }
 
 class _DashBoardscreeenState extends State<DashBoardscreeen> {
+  @override
   void initState() {
     super.initState();
     startInternetCheck();
@@ -25,7 +26,7 @@ class _DashBoardscreeenState extends State<DashBoardscreeen> {
 
   void startInternetCheck() {
     // keep checking for internet connection every 5 sec 
-    Timer.periodic(Duration(seconds: 5), (timer) async {
+    Timer.periodic(const Duration(seconds: 5), (timer) async {
       var connectivityResult = await Connectivity().checkConnectivity();
       if (connectivityResult == ConnectivityResult.none) showBanner(context);
     });
@@ -34,13 +35,14 @@ class _DashBoardscreeenState extends State<DashBoardscreeen> {
   Future<void> showBanner(BuildContext context) async {
     var connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.none) {
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           backgroundColor: snackbarBackgroundColor,
           content: Text(
               "Failed to continue. Please check your internet connection.",
               style: TextStyle(color: Colors.white, fontFamily: fontFamily)),
-          duration: Duration(seconds: 4),
+          duration: const Duration(seconds: 4),
         ),
       );
     }
@@ -48,14 +50,14 @@ class _DashBoardscreeenState extends State<DashBoardscreeen> {
 
 
   int currentPage = 0;
-  GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
-  var backgroundColor = Color.fromRGBO(101, 0, 56, 1.0);
+  final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
+  var backgroundColor = const Color.fromRGBO(101, 0, 56, 1.0);
 
   late final List<Widget> tabPages = [
-    HomeTab(),
-    TransferTab(),
-    HistoryTab(),
-    SettingTab(),
+    const HomeTab(),
+    const TransferTab(),
+    const HistoryTab(),
+    const SettingTab(),
   ];
   var textstyle = textStyle.copyWith(
     color: Colors.white,
@@ -98,10 +100,10 @@ class _DashBoardscreeenState extends State<DashBoardscreeen> {
                         backgroundImage: (userPicture.userImage.isNotEmpty)
                             ? MemoryImage(userPicture.userImage)
                                 as ImageProvider<Object>?
-                            : AssetImage(''),
+                            : const AssetImage(''),
                       )
                     : Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Colors.white,
                           shape: BoxShape.circle,
                         ),
@@ -129,8 +131,8 @@ class _DashBoardscreeenState extends State<DashBoardscreeen> {
         buttonBackgroundColor: backgroundColor,
         animationCurve: Curves.easeInOut,
         height: 65.0, // Adjust the height value as needed
-        backgroundColor: Color.fromRGBO(101, 0, 56, 0.45),
-        animationDuration: Duration(milliseconds: 300),
+        backgroundColor: const Color.fromRGBO(101, 0, 56, 0.45),
+        animationDuration: const Duration(milliseconds: 300),
         onTap: (index) {
           setState(() {
             currentPage = index;
