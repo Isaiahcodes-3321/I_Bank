@@ -1,7 +1,7 @@
+import '../Storage/person.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import '../Storage/person.dart';
 
 //my storage Make Hive accessible anywhere,
 late Box<UserStorage> userStorage;
@@ -9,6 +9,7 @@ late Box<UserStorageImage> userStorageImage;
 late Box<ReceiverStorage> receiverStorage;
 
 var fontFamily = 'BodoniModa-VariableFont_opsz,wght';
+
 
 var backgroundColor = const Color.fromRGBO(101, 0, 56, 1.0);
 var snackbarBackgroundColor = const Color.fromRGBO(134, 20, 83, 0.705);
