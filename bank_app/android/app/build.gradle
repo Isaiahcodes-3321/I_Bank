@@ -36,7 +36,7 @@ if (keystorePropertiesFile.exists()) {
 
 
 android {
-    namespace "com.example.bank_app"
+    namespace "com.isaiahcodes.bank_app"
     compileSdkVersion 33
     ndkVersion flutter.ndkVersion
 
