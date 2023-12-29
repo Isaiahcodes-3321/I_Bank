@@ -1,4 +1,0 @@
-storePassword=isaiah3321
-keyPassword=isaiah3321
-keyAlias=upload
-storeFile=../app/upload-keystore.jks

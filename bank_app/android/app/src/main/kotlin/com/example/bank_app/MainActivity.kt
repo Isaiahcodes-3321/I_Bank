@@ -1,6 +1,5 @@
-package com.isaiahcodes.bank_app
+package com.example.bank_app
 
 import io.flutter.embedding.android.FlutterActivity
 
-class MainActivity: FlutterActivity() {
-}
+class MainActivity: FlutterActivity()
