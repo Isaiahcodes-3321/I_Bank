@@ -1,11 +1,11 @@
-import 'package:bank_app/Storage/person.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:provider/provider.dart';
 import 'Constant/Themes.dart';
 import 'Model/receiverDetails.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'SplashScreen/splashScreen.dart';
+import 'package:bank_app/Storage/person.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 
@@ -59,3 +59,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+                 
+          
