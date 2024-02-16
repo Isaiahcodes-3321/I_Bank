@@ -12,7 +12,7 @@ class ReceiverDetails extends ChangeNotifier {
 
   void updateMoneySent(
       String sendmoney, receiverName, receiverPhoneNumber) {
-    this.sendMoney = sendmoney;
+    sendMoney = sendmoney;
     this.receiverName = receiverName;
     this.receiverPhoneNumber = receiverPhoneNumber;
     notifyListeners();

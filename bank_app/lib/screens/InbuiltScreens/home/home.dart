@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
-import '../../../Constant/Themes.dart';
-import '../../../Storage/person.dart';
 import 'homeTransactionHistory.dart';
+import '../../../Storage/person.dart';
+import 'package:flutter/material.dart';
+import 'package:bank_app/widgets/Themes.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+
 
 class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
@@ -14,7 +15,7 @@ class HomeTab extends StatefulWidget {
 class _HomeTabState extends State<HomeTab> {
   bool hideMoney = false;
 
-  final List<Color> _colors = [backgroundColor,  const Color.fromRGBO(175, 20, 131, 1)];
+  final List<Color> _colors = [appBackgroundColor,  const Color.fromRGBO(175, 20, 131, 1)];
   int _currentColorIndex = 0;
 
   @override
@@ -52,15 +53,15 @@ class _HomeTabState extends State<HomeTab> {
 
     var textStyleHomePage = TextStyle(
       fontSize: 20.sp,
-      color: _colors[_currentColorIndex] == Colors.green
-          ? Colors.white
-          : Colors.white,
+      color: _colors[_currentColorIndex] == appGreenColor
+          ? whiteColor
+          : whiteColor,
     );
 
     var txtUserName = textStyle.copyWith(
-      color: _colors[_currentColorIndex] == Colors.green
-          ? Colors.white
-          : Colors.white,
+      color: _colors[_currentColorIndex] == appGreenColor
+          ? whiteColor
+          : whiteColor,
       fontSize: 19.sp,
       overflow: TextOverflow.ellipsis,
     );
@@ -94,16 +95,16 @@ class _HomeTabState extends State<HomeTab> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 userName != null
-                                    ? Text("${userName.name}",
+                                    ? Text(userName.name,
                                         style: txtUserName)
                                     : Text(".....", style: txtUserName),
                                 Text(
                                   '4802 **** **** 2903',
                                   style: textStyle.copyWith(
                                     color: _colors[_currentColorIndex] ==
-                                            Colors.green
-                                        ? Colors.white
-                                        : Colors.white,
+                                            appGreenColor
+                                        ? whiteColor
+                                        : whiteColor,
                                     fontSize: 20.sp,
                                   ),
                                 ),
@@ -119,9 +120,9 @@ class _HomeTabState extends State<HomeTab> {
                                   'BALANCE',
                                   style: textStyle.copyWith(
                                     color: _colors[_currentColorIndex] ==
-                                            Colors.green
-                                        ? Colors.white
-                                        : Colors.white,
+                                            appGreenColor
+                                        ? whiteColor
+                                        : whiteColor,
                                     fontSize: 19.sp,
                                   ),
                                 ),
@@ -142,17 +143,17 @@ class _HomeTabState extends State<HomeTab> {
                                                   fontSize: 20.sp,
                                                   color:
                                                       _colors[_currentColorIndex] ==
-                                                              Colors.green
-                                                          ? Colors.white
-                                                          : Colors.white,
+                                                              appGreenColor
+                                                          ? whiteColor
+                                                          : whiteColor,
                                                 ),
                                               ),
                                     IconButton(
                                       icon: hideMoney
-                                          ? const Icon(Icons.visibility_off,
-                                              color: Colors.white)
-                                          : const Icon(Icons.visibility,
-                                              color: Colors.white),
+                                          ?  Icon(Icons.visibility_off,
+                                              color: whiteColor)
+                                          :  Icon(Icons.visibility,
+                                              color: whiteColor),
                                       onPressed: () {
                                         setState(() {
                                           hideMoney = !hideMoney;
@@ -181,7 +182,7 @@ class _HomeTabState extends State<HomeTab> {
                       width: double.infinity,
                       decoration: BoxDecoration(
                           border:
-                              Border.all(color: backgroundColor, width: 5.sp),
+                              Border.all(color: appBackgroundColor, width: 5.sp),
                           borderRadius: const BorderRadius.all(Radius.circular(8))),
                       child: Padding(
                           padding: EdgeInsets.all(13.sp),
@@ -205,8 +206,8 @@ class _HomeTabState extends State<HomeTab> {
                             children: [
                               Text('See all click',
                                   style: textStyle.copyWith(
-                                      fontSize: 17.sp, color: Colors.green)),
-                              Icon(Icons.history, color: backgroundColor),
+                                      fontSize: 17.sp, color: appGreenColor)),
+                              Icon(Icons.history, color: appBackgroundColor),
                               Text("👇", style: TextStyle(fontSize: 20.sp)),
                             ],
                           ),

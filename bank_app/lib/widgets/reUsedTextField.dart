@@ -1,6 +1,6 @@
+import 'Themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'; 
-import 'Themes.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ReUsedTextField extends StatelessWidget {
@@ -27,14 +27,14 @@ class ReUsedTextField extends StatelessWidget {
           keyboardType: keyboardType,
           inputFormatters: inputFormatters, 
           decoration: InputDecoration(
-            focusColor: Colors.white,
+            focusColor: whiteColor,
             hintText: hintText,
             hintStyle: const TextStyle(
               color:  Color.fromARGB(255, 104, 104, 104),
             ),
            focusedBorder: outlineInputBorder,
             enabledBorder: outlineInputBorder,
-            fillColor: Colors.white,
+            fillColor: whiteColor,
           ),
           onChanged: onChanged,
         ),

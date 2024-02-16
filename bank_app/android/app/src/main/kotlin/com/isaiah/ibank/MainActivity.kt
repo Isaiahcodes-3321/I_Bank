@@ -1,4 +1,4 @@
-package com.isaiahcodes.Ibank
+package com.isaiah.ibank
 
 import io.flutter.embedding.android.FlutterActivity
 

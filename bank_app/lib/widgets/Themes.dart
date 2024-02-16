@@ -11,8 +11,13 @@ late Box<ReceiverStorage> receiverStorage;
 var fontFamily = 'BodoniModa-VariableFont_opsz,wght';
 
 
-var backgroundColor = const Color.fromRGBO(101, 0, 56, 1.0);
-var snackbarBackgroundColor = const Color.fromRGBO(134, 20, 83, 0.705);
+Color appBackgroundColor = const Color.fromRGBO(101, 0, 56, 1.0);
+Color whiteColor = Colors.white;
+Color grayColor = Colors.grey;
+Color blackColor = Colors.black;
+Color deepPurpleColor = Color.fromARGB(255, 58, 0, 32);
+Color appGreenColor = Colors.green;
+Color snackbarBackgroundColor = const Color.fromRGBO(134, 20, 83, 0.705);
 
 var textStyle = TextStyle(
     color: const Color.fromRGBO(101, 0, 56, 1.0),
@@ -30,5 +35,5 @@ var outlineInputBorder = OutlineInputBorder(
 
 var listTileDecoration = BoxDecoration(
   borderRadius: BorderRadius.all(Radius.circular(15.sp)),
-  border: Border.all(width: 5.sp, color: backgroundColor),
+  border: Border.all(width: 5.sp, color: appBackgroundColor),
 );

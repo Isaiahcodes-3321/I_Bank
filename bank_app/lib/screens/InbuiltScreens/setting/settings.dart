@@ -1,13 +1,15 @@
 import 'dart:io';
-import 'package:flutter/foundation.dart';
+import '../../../Storage/person.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'package:bank_app/widgets/Themes.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../Animations/Dialogs/AddMoreFunds.dart';
-import '../../Constant/Themes.dart';
-import '../../Storage/person.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:pattern_formatter/pattern_formatter.dart';
+import 'package:bank_app/globalDialogs/dialogs/addmore_funds.dart';
+
+
 
 class SettingTab extends StatefulWidget {
   const SettingTab({super.key});
@@ -146,8 +148,8 @@ class _SettingTabState extends State<SettingTab> {
                                     children: [
                                       Padding(
                                           padding: EdgeInsets.only(top: 1.h),
-                                          child: const Divider(
-                                            color: Colors.black,
+                                          child: Divider(
+                                            color: blackColor,
                                           )),
                                       Padding(
                                         padding: EdgeInsets.only(
@@ -163,7 +165,7 @@ class _SettingTabState extends State<SettingTab> {
                                                 content: Text(
                                                     "All data have been deleted successfully",
                                                     style: TextStyle(
-                                                        color: Colors.white,
+                                                        color: whiteColor,
                                                         fontFamily:
                                                             fontFamily)),
                                                 duration: const Duration(seconds: 2),
@@ -201,14 +203,14 @@ class _SettingTabState extends State<SettingTab> {
                                       radius: 50.sp,
                                     )
                                   : Container(
-                                      decoration: const BoxDecoration(
-                                        color: Colors.white,
+                                      decoration: BoxDecoration(
+                                        color: whiteColor,
                                         shape: BoxShape.circle,
                                       ),
                                       child: Icon(
                                         Icons.person,
                                         size: 55.sp,
-                                        color: Colors.grey,
+                                        color: grayColor,
                                       ),
                                     ),
                             ),
@@ -222,14 +224,14 @@ class _SettingTabState extends State<SettingTab> {
                                   },
                                   style: ButtonStyle(
                                     backgroundColor: MaterialStateProperty.all(
-                                        backgroundColor),
+                                        appBackgroundColor),
                                   ),
                                   child: Padding(
                                     padding: buttonPadding,
                                     child: Text('Select',
                                         style: textStyle.copyWith(
                                             fontSize: 18.sp,
-                                            color: Colors.white)),
+                                            color: whiteColor)),
                                   ),
                                 ),
                                 TextButton(
@@ -242,7 +244,7 @@ class _SettingTabState extends State<SettingTab> {
                                         content: Text(
                                             "Image saved Successfully",
                                             style: TextStyle(
-                                                color: Colors.white,
+                                                color: whiteColor,
                                                 fontFamily: fontFamily)),
                                         duration: const Duration(seconds: 2),
                                       ),
@@ -250,14 +252,14 @@ class _SettingTabState extends State<SettingTab> {
                                   },
                                   style: ButtonStyle(
                                     backgroundColor: MaterialStateProperty.all(
-                                        backgroundColor),
+                                        appBackgroundColor),
                                   ),
                                   child: Padding(
                                     padding: buttonPadding,
                                     child: Text('Save Image',
                                         style: textStyle.copyWith(
                                             fontSize: 18.sp,
-                                            color: Colors.white)),
+                                            color: whiteColor)),
                                   ),
                                 ),
                               ],
@@ -271,14 +273,13 @@ class _SettingTabState extends State<SettingTab> {
                                 TextFormField(
                                   controller: userName,
                                   decoration: InputDecoration(
-                                      focusColor: Colors.white,
+                                      focusColor: whiteColor,
                                       hintText: " Set user name",
-                                      hintStyle: const TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 104, 104, 104)),
+                                      hintStyle: TextStyle(
+                                          color: grayColor),
                                       focusedBorder: outlineInputBorder,
                                       enabledBorder: outlineInputBorder,
-                                      fillColor: Colors.white),
+                                      fillColor: whiteColor),
                                 ),
                                 SizedBox(
                                   height: 1.h,
@@ -288,14 +289,13 @@ class _SettingTabState extends State<SettingTab> {
                                   keyboardType: TextInputType.number,
                                   inputFormatters: [ThousandsFormatter()],
                                   decoration: InputDecoration(
-                                      focusColor: Colors.white,
+                                      focusColor: whiteColor,
                                       hintText: " Add funds",
-                                      hintStyle: const TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 104, 104, 104)),
+                                      hintStyle: TextStyle(
+                                          color: grayColor),
                                       focusedBorder: outlineInputBorder,
                                       enabledBorder: outlineInputBorder,
-                                      fillColor: Colors.white),
+                                      fillColor: whiteColor),
                                 ),
                                 SizedBox(
                                   height: 1.h,
@@ -314,7 +314,7 @@ class _SettingTabState extends State<SettingTab> {
                                               snackbarBackgroundColor,
                                           content: Text("Inputs are required",
                                               style: TextStyle(
-                                                  color: Colors.white,
+                                                  color: whiteColor,
                                                   fontFamily: fontFamily)),
                                           duration: const Duration(seconds: 2),
                                         ),
@@ -331,7 +331,7 @@ class _SettingTabState extends State<SettingTab> {
                                                 snackbarBackgroundColor,
                                             content: Text("Successfully Saved",
                                                 style: TextStyle(
-                                                    color: Colors.white,
+                                                    color: whiteColor,
                                                     fontFamily: fontFamily)),
                                             duration: const Duration(seconds: 2),
                                           ),
@@ -345,14 +345,14 @@ class _SettingTabState extends State<SettingTab> {
                                   },
                                   style: ButtonStyle(
                                     backgroundColor: MaterialStateProperty.all(
-                                        backgroundColor),
+                                        appBackgroundColor),
                                   ),
                                   child: Padding(
                                     padding: buttonPadding,
                                     child: Text('Save',
                                         style: textStyle.copyWith(
                                             fontSize: 18.sp,
-                                            color: Colors.white)),
+                                            color: whiteColor)),
                                   ),
                                 ),
                               ],

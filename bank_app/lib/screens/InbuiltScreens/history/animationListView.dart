@@ -1,19 +1,16 @@
-import 'package:bank_app/Constant/Themes.dart';
-import 'package:bank_app/Storage/person.dart';
-import 'package:clickable_list_wheel_view/clickable_list_wheel_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
+import 'exportHistory.dart';
 
-class AnimatedListview extends StatelessWidget {
-  AnimatedListview({super.key});
+
+
+class AnimatedListView extends StatelessWidget {
+  AnimatedListView({super.key});
 
   final _scrollController = FixedExtentScrollController();
 
-  static double _itemHeight = 13.h;
+  static final double _itemHeight = 13.h;
   @override
   Widget build(BuildContext context) {
-    final reCeiverstorage = Hive.box<ReceiverStorage>('receiverBox');
+    final reCeiverStorage = Hive.box<ReceiverStorage>('receiverBox');
 
     return Expanded(
       child: Padding(
@@ -21,10 +18,9 @@ class AnimatedListview extends StatelessWidget {
         child: ClickableListWheelScrollView(
           scrollController: _scrollController,
           itemHeight: _itemHeight,
-          itemCount: reCeiverstorage.length,
+          itemCount: reCeiverStorage.length,
           onItemTapCallback: (index) {
             print("onItemTapCallback index: $index");
-            // Add your onTap logic here
           },
           child: ListWheelScrollView.useDelegate(
             controller: _scrollController,
@@ -38,9 +34,9 @@ class AnimatedListview extends StatelessWidget {
             },
             childDelegate: ListWheelChildBuilderDelegate(
               builder: (context, index) {
-                final receiverIndex = reCeiverstorage.length - index - 1;
+                final receiverIndex = reCeiverStorage.length - index - 1;
                 final receiver =
-                    reCeiverstorage.getAt(receiverIndex) as ReceiverStorage;
+                    reCeiverStorage.getAt(receiverIndex) as ReceiverStorage;
                 return Padding(
                   padding: EdgeInsets.only(bottom: 2.h),
                   child: Container(
@@ -57,7 +53,7 @@ class AnimatedListview extends StatelessWidget {
                       subtitle: Text(
                         "\u20A6${receiver.receiverAmount1}",
                         style: TextStyle(
-                          color: backgroundColor,
+                          color: appBackgroundColor,
                           fontSize: 17.sp,
                         ),
                       ),
@@ -74,7 +70,7 @@ class AnimatedListview extends StatelessWidget {
                           Align(
                             alignment: Alignment.topRight,
                             child: Icon(Icons.arrow_outward,
-                                size: 22.sp, color: Colors.green),
+                                size: 22.sp, color: appGreenColor),
                           ),
                         ],
                       ),
@@ -82,7 +78,7 @@ class AnimatedListview extends StatelessWidget {
                   ),
                 );
               },
-              childCount: reCeiverstorage.length,
+              childCount: reCeiverStorage.length,
             ),
           ),
         ),

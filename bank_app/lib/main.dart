@@ -1,21 +1,22 @@
-import 'Constant/Themes.dart';
-import 'Model/receiverDetails.dart';
+import 'model/receiverDetails.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'SplashScreen/splashScreen.dart';
+import 'package:bank_app/widgets/Themes.dart';
 import 'package:bank_app/Storage/person.dart';
+import 'screens/splashScreen/splashScreen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+// import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // MobileAds.instance.initialize();
   await setupHive();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
-
   runApp(const MyApp());
 }
 
@@ -35,15 +36,16 @@ Future<void> openHiveBoxes() async {
   userStorageImage = await Hive.openBox<UserStorageImage>('userBoxImage');
 }
 
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
- 
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => Date(),),
+        ChangeNotifierProvider(
+          create: (context) => Date(),
+        ),
         ChangeNotifierProvider(create: (_) => ReceiverDetails()),
       ],
       child: ResponsiveSizer(
@@ -59,6 +61,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-                 
-          

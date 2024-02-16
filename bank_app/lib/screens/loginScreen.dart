@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:bank_app/widgets/Themes.dart';
+import '../globalDialogs/loadto_dashboard.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+// import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import '../Animations/loadtoDashboard.dart';
-import '../Constant/Themes.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -12,7 +13,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  bool hidepassword = true;
+  bool hidePassword = true;
   var getUserName = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
@@ -20,7 +21,9 @@ class _LoginPageState extends State<LoginPage> {
   var sizedBox = SizedBox(height: 3.h);
   var outlineInputBorder = OutlineInputBorder(
       borderRadius: BorderRadius.circular(18.sp),
-      borderSide: BorderSide(color: Colors.white, width: 1.w));
+      borderSide: BorderSide(color: whiteColor, width: 1.w));
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
             elevation: 0,
-            backgroundColor: backgroundColor,
+            backgroundColor: appBackgroundColor,
             leadingWidth: double.infinity,
             leading: Align(
               alignment: Alignment.centerLeft,
@@ -38,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Text(
                   'Welcome ',
                   style: textStyle.copyWith(
-                    color: Colors.white,
+                    color: whiteColor,
                   ),
                 ),
               ),
@@ -47,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
           height: double.infinity,
           width: double.infinity,
           child: Container(
-            color: const Color.fromRGBO(101, 0, 56, 1.0),
+            color: appBackgroundColor,
             child: Stack(children: [
               Row(
                 children: [
@@ -74,7 +77,8 @@ class _LoginPageState extends State<LoginPage> {
                                   height: 5.h,
                                 ),
                                 Text('Login',
-                                    style: textStyle.copyWith(fontSize: 30.sp,color: Colors.white)),
+                                    style: textStyle.copyWith(
+                                        fontSize: 30.sp, color: whiteColor)),
                                 SizedBox(
                                   height: 6.h,
                                 ),
@@ -83,7 +87,8 @@ class _LoginPageState extends State<LoginPage> {
                                   child: Column(
                                     children: [
                                       TextFormField(
-                                        style: const TextStyle(color: Colors.white),
+                                        style: TextStyle(
+                                            color: whiteColor),
                                         validator: (value) {
                                           if (value == null || value.isEmpty) {
                                             return 'Please enter phone number';
@@ -92,55 +97,57 @@ class _LoginPageState extends State<LoginPage> {
                                         },
                                         keyboardType: TextInputType.number,
                                         decoration: InputDecoration(
-                                          errorStyle: const TextStyle(color: Colors.white),
-                                            focusColor: Colors.white,
+                                            errorStyle: TextStyle(
+                                                color: whiteColor),
+                                            focusColor: whiteColor,
                                             hintText: " Phone number",
-                                            hintStyle:
-                                                const TextStyle(color: Colors.grey),
-                                            prefixIcon: const Icon(
+                                            hintStyle: TextStyle(
+                                                color: grayColor),
+                                            prefixIcon: Icon(
                                                 Icons.man_4_outlined,
-                                                color: Colors.white),
+                                                color: whiteColor),
                                             focusedBorder: outlineInputBorder,
                                             enabledBorder: outlineInputBorder,
-                                            fillColor: Colors.white),
+                                            fillColor: whiteColor),
                                       ),
                                       sizedBox,
                                       TextFormField(
-                                        obscureText: hidepassword,
+                                        obscureText: hidePassword,
                                         validator: (value) {
                                           if (value == null || value.isEmpty) {
                                             return "Please enter some text";
                                           }
                                           return null;
                                         },
-                                        style: const TextStyle(color: Colors.white),
+                                        style: TextStyle(
+                                            color: whiteColor),
                                         decoration: InputDecoration(
-                                          
-                                          errorStyle: const TextStyle(color: Colors.white),
+                                            errorStyle: TextStyle(
+                                                color: whiteColor),
                                             hintText: "Password",
-                                            hintStyle:
-                                                const TextStyle(color: Colors.grey),
-                                            prefixIcon: const Icon(
+                                            hintStyle: TextStyle(
+                                                color: grayColor),
+                                            prefixIcon:  Icon(
                                                 Icons.lock_person_rounded,
-                                                color: Colors.white),
+                                                color: whiteColor),
                                             suffixIcon: IconButton(
-                                              icon: hidepassword
-                                                  ? const Icon(Icons.visibility,
-                                                      color: Colors.white)
-                                                  : const Icon(
+                                              icon: hidePassword
+                                                  ?  Icon(Icons.visibility,
+                                                      color: whiteColor)
+                                                  : Icon(
                                                       Icons.visibility_off,
-                                                      color: Colors.white),
+                                                      color: whiteColor),
                                               color: const Color.fromARGB(
                                                   255, 28, 27, 27),
                                               onPressed: () {
                                                 setState(() {
-                                                  hidepassword = !hidepassword;
+                                                  hidePassword = !hidePassword;
                                                 });
                                               },
                                             ),
                                             focusedBorder: outlineInputBorder,
                                             enabledBorder: outlineInputBorder,
-                                            fillColor: Colors.white),
+                                            fillColor: whiteColor),
                                       ),
                                     ],
                                   ),
@@ -174,13 +181,11 @@ class _LoginPageState extends State<LoginPage> {
                   );
                 }
               },
-              backgroundColor: Colors.white,
-              child: Text('Login',
-                  style: textStyle.copyWith(fontSize: 16.sp)),
+              backgroundColor: whiteColor,
+              child: Text('Login', style: textStyle.copyWith(fontSize: 16.sp)),
             ),
-          ),
+          ),)
         ),
-      ),
     );
   }
 }

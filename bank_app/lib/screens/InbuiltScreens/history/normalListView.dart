@@ -1,13 +1,10 @@
-import 'package:bank_app/Constant/Themes.dart';
-import 'package:bank_app/Storage/person.dart';
-import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
+import 'exportHistory.dart';
+
 
 class NormalListView extends StatelessWidget {
   NormalListView({super.key});
 
-  final reCeiverstorage = Hive.box<ReceiverStorage>('receiverBox');
+  final receiverStorage = Hive.box<ReceiverStorage>('receiverBox');
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +16,10 @@ class NormalListView extends StatelessWidget {
               shrinkWrap: true,
               reverse: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: reCeiverstorage.length,
+              itemCount: receiverStorage.length,
               itemBuilder: (context, index) {
                 final receiver =
-                    reCeiverstorage.getAt(index) as ReceiverStorage;
+                    receiverStorage.getAt(index) as ReceiverStorage;
                 return Padding(
                   padding: EdgeInsets.only(bottom: 2.h),
                   child: Container(
@@ -39,7 +36,7 @@ class NormalListView extends StatelessWidget {
                       subtitle: Text(
                         "\u20A6${receiver.receiverAmount1}",
                         style: TextStyle(
-                          color: backgroundColor,
+                          color: appBackgroundColor,
                           fontSize: 17.sp,
                         ),
                       ),
@@ -52,12 +49,11 @@ class NormalListView extends StatelessWidget {
                               style: textStyle.copyWith(fontSize: 15.sp),
                             ),
                           ),
-                          SizedBox(
-                              width:
-                                  3.w),
-                                   Align(alignment: Alignment.topRight,
+                          SizedBox(width: 3.w),
+                          Align(
+                            alignment: Alignment.topRight,
                             child: Icon(Icons.arrow_outward,
-                                size: 22.sp, color: Colors.green),
+                                size: 22.sp, color: appGreenColor),
                           ),
                         ],
                       ),

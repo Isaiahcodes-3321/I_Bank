@@ -1,17 +1,20 @@
+import '../../../Storage/person.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:pattern_formatter/numeric_formatter.dart';
 import 'package:provider/provider.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
-import '../../Animations/Dialogs/Insufficient funds.dart';
-import '../../Animations/Dialogs/alertDialog.dart';
-import '../../Constant/Themes.dart';
-import '../../Constant/reUsedTextField.dart';
-import 'package:flutter_dialogs/flutter_dialogs.dart';
+import '../../../Model/receiverDetails.dart';
+import 'package:bank_app/widgets/Themes.dart';
 import 'package:date_format/date_format.dart';
-import '../../Model/receiverDetails.dart';
-import '../../Storage/person.dart';
-// import 'package:telephony/telephony.dart';
+import 'package:flutter_dialogs/flutter_dialogs.dart';
+import 'package:bank_app/widgets/reUsedTextField.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+import '../../../globalDialogs/Dialogs/alertDialog.dart';
+import 'package:pattern_formatter/numeric_formatter.dart';
+import 'package:bank_app/globalDialogs/dialogs/insufficient_funds.dart';
+import 'package:bank_app/screens/InbuiltScreens/transfer/controllers.dart';
+
+
+
+
 
 class TransferTab extends StatefulWidget {
   const TransferTab({super.key});
@@ -21,67 +24,17 @@ class TransferTab extends StatefulWidget {
 }
 
 class _TransferTabState extends State<TransferTab> {
-  var date = '';
-  var time = '';
-
   @override
   void initState() {
     super.initState();
-    openHiveBox();
-  }
-
-  //  message: "From I Bank \u20A6$reCeiverAmount have been sent to you",
-
-// get user input
-  TextEditingController receiverName = TextEditingController();
-  TextEditingController reCeiverAmount = TextEditingController();
-  TextEditingController receiverPhoneNumbeR = TextEditingController();
-
-  // Open Hive box for user storage
-  Future<void> openHiveBox() async {
-    receiverStorage = await Hive.openBox<ReceiverStorage>('receiverBox');
-  }
-
-  // Write data
-  Future<void> writeUserData() async {
-    if (reCeiverAmount.text.isNotEmpty) {
-      // final userStorageKey = 'userName_Funds';
-      final userStorageData = ReceiverStorage(
-        dateSent: date,
-        timeSent: time,
-        receiverAmount1: reCeiverAmount.text,
-        receiverName: receiverName.text,
-        receiverNumber: receiverPhoneNumbeR.text,
-      );
-      await receiverStorage.add(userStorageData);
-    }
-  }
-
-//  update the user Money
-  late int fundsValue1;
-  Future<void> subtractMoney() async {
-    if (reCeiverAmount.text.isNotEmpty) {
-      String userStorageKey = 'userName_Funds';
-
-      // Check if the key exists in the box
-      if (userStorage.containsKey(userStorageKey)) {
-        // Get the existing data
-        UserStorage? existingData = userStorage.get(userStorageKey);
-
-        // Update the funds field
-        existingData?.funds -= fundsValue1;
-
-        // Put the updated data back into the box
-        userStorage.put(userStorageKey, existingData!);
-      }
-    }
+    ControllerForTransfer.openHiveBox();
   }
 
   @override
   void dispose() {
-    reCeiverAmount.dispose();
-    receiverName.dispose();
-    receiverPhoneNumbeR.dispose();
+    ControllerForInputTransfer.reCeiverAmount.dispose();
+    ControllerForInputTransfer.receiverName.dispose();
+    ControllerForInputTransfer.receiverPhoneNumbeR.dispose();
     super.dispose();
   }
 
@@ -103,7 +56,7 @@ class _TransferTabState extends State<TransferTab> {
                 borderRadius: BorderRadius.circular(
                   20.sp,
                 ),
-                border: Border.all(width: 1.w, color: backgroundColor),
+                border: Border.all(width: 1.w, color: appBackgroundColor),
               ),
               child: Padding(
                 padding: EdgeInsets.all(15.sp),
@@ -111,7 +64,7 @@ class _TransferTabState extends State<TransferTab> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       ReUsedTextField(
-                        controller: reCeiverAmount,
+                        controller: ControllerForInputTransfer.reCeiverAmount,
                         keyboardType: TextInputType.number,
                         inputFormatters: [ThousandsFormatter()],
                         hintText: " Amount",
@@ -119,21 +72,22 @@ class _TransferTabState extends State<TransferTab> {
                           // get the current date and month and time
                           setState(() {
                             var datetime = DateTime.now();
-                            date = formatDate(
+                            ControllerForTransfer.date = formatDate(
                                 DateTime.now(), [d, ", ", M, ", ", yyyy]);
-                            time =
+                            ControllerForTransfer.time =
                                 '${datetime.hour}:${datetime.minute}:${datetime.second}';
                           });
                         },
                       ),
                       ReUsedTextField(
-                        controller: receiverPhoneNumbeR,
+                        controller:
+                            ControllerForInputTransfer.receiverPhoneNumbeR,
                         keyboardType: TextInputType.phone,
                         hintText: " Phone Number",
                         onChanged: (value) {},
                       ),
                       ReUsedTextField(
-                        controller: receiverName,
+                        controller: ControllerForInputTransfer.receiverName,
                         keyboardType: TextInputType.text,
                         hintText: " Name",
                         onChanged: (value) {},
@@ -143,9 +97,12 @@ class _TransferTabState extends State<TransferTab> {
                       ),
                       TextButton(
                         onPressed: () async {
-                          if (reCeiverAmount.text.isEmpty ||
-                              receiverName.text.isEmpty ||
-                              receiverPhoneNumbeR.text.isEmpty) {
+                          if (ControllerForInputTransfer
+                                  .reCeiverAmount.text.isEmpty ||
+                              ControllerForInputTransfer
+                                  .receiverName.text.isEmpty ||
+                              ControllerForInputTransfer
+                                  .receiverPhoneNumbeR.text.isEmpty) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 backgroundColor: snackbarBackgroundColor,
@@ -153,7 +110,7 @@ class _TransferTabState extends State<TransferTab> {
                                   child: Text(
                                       "Transfer Failed! Please fill all inputs correctly",
                                       style: TextStyle(
-                                          color: Colors.white,
+                                          color: whiteColor,
                                           fontFamily: fontFamily)),
                                 ),
                                 duration: const Duration(seconds: 2),
@@ -165,29 +122,35 @@ class _TransferTabState extends State<TransferTab> {
                             UserStorage? existingData =
                                 userStorage.get(userStorageKey);
 
-                            String fundsText =
-                                reCeiverAmount.text.replaceAll(',', '');
-                            fundsValue1 = int.tryParse(fundsText) ?? 0;
+                            String fundsText = ControllerForInputTransfer
+                                .reCeiverAmount.text
+                                .replaceAll(',', '');
+                            ControllerForTransfer.fundsValue1 =
+                                int.tryParse(fundsText) ?? 0;
 
                             if (existingData != null) {
-                              if (existingData.funds < fundsValue1) {
+                              if (existingData.funds <
+                                  ControllerForTransfer.fundsValue1) {
                                 showPlatformDialog(
                                   context: context,
                                   builder: (context) {
-                                    return (const Insufficientfunds());
+                                    return ( const Insufficientfunds());
                                   },
                                 );
                               } else {
-                                 // send data to user data and time provider
+                                // send data to user data and time provider
                                 Provider.of<ReceiverDetails>(context,
-                                    listen: false)
-                                  ..updateMoneySent(
-                                      reCeiverAmount.text,
-                                      receiverName.text,
-                                      receiverPhoneNumbeR.text);
+                                        listen: false)
+                                    .updateMoneySent(
+                                        ControllerForInputTransfer
+                                            .reCeiverAmount.text,
+                                        ControllerForInputTransfer
+                                            .receiverName.text,
+                                        ControllerForInputTransfer
+                                            .receiverPhoneNumbeR.text);
                                 // send data to user data and time provider
                                 Provider.of<Date>(context, listen: false)
-                                  ..dATE(date);
+                                    .dATE(ControllerForTransfer.date);
 
                                 // show dialog of Transaction successfully
                                 showPlatformDialog(
@@ -199,15 +162,17 @@ class _TransferTabState extends State<TransferTab> {
 
                                 //  calling funtion to subtract money when user send any amount
                                 setState(() {
-                                  subtractMoney();
-                                  writeUserData();
+                                  ControllerForTransfer.subtractMoney();
+                                  ControllerForTransfer.writeUserData();
                                 });
 
                                 print('Stored Data');
                                 // if user clicks on ok clear text that have been inputed by the user
-                                reCeiverAmount.clear();
-                                receiverName.clear();
-                                receiverPhoneNumbeR.clear();
+                                ControllerForInputTransfer.reCeiverAmount
+                                    .clear();
+                                ControllerForInputTransfer.receiverName.clear();
+                                ControllerForInputTransfer.receiverPhoneNumbeR
+                                    .clear();
                               }
                             } else {
                               showPlatformDialog(
@@ -221,13 +186,13 @@ class _TransferTabState extends State<TransferTab> {
                         },
                         style: ButtonStyle(
                           backgroundColor:
-                              MaterialStateProperty.all(backgroundColor),
+                              MaterialStateProperty.all(appBackgroundColor),
                         ),
                         child: Padding(
                           padding: buttonPadding,
                           child: Text('Send',
                               style: textStyle.copyWith(
-                                  fontSize: 18.sp, color: Colors.white)),
+                                  fontSize: 18.sp, color: whiteColor)),
                         ),
                       ),
                     ]),
@@ -239,3 +204,18 @@ class _TransferTabState extends State<TransferTab> {
     );
   }
 }
+
+// class Controller {
+//   static final _easySmsPlugin = EasySms();
+
+//   static Future<void> sendSms({required String phone, required msg}) async {
+//     try {
+//       print('sending sms');
+//       _easySmsPlugin.requestSmsPermission();
+//       _easySmsPlugin.sendSms(phone: phone, msg: msg);
+//       print('Sending SMS to $phone: $msg');
+//     } catch (err) {
+//       print("Error its ${err.toString()}");
+//     }
+//   }
+// }

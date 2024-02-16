@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:bank_app/widgets/Themes.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../../Constant/Themes.dart';
 
 class Insufficientfunds extends StatelessWidget {
   const Insufficientfunds({super.key});
@@ -17,15 +17,15 @@ class Insufficientfunds extends StatelessWidget {
           children: [
             Text("Failed!",
                 style: textStyle.copyWith(
-                    fontSize: 30.sp, color: backgroundColor)),
-            Icon(Icons.cancel_outlined, color: backgroundColor, size: 30.sp)
+                    fontSize: 30.sp, color: appBackgroundColor)),
+            Icon(Icons.cancel_outlined, color: appBackgroundColor, size: 30.sp)
           ],
         ),
       ),
-      // getting the current Transaction details from Providder state management
+      // getting the current Transaction details from Provider state management
       content: Text("Insufficient funds. Please try again.",
           style: textStyle.copyWith(
-              fontSize: 20.sp, color: const Color.fromRGBO(25, 0, 14, 1)),
+              fontSize: 20.sp, color: deepPurpleColor),
           textAlign: TextAlign.center),
       actions: <Widget>[
         BasicDialogAction(

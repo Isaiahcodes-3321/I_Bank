@@ -1,29 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:provider/provider.dart';
+import '../../Model/receiverDetails.dart';
+import 'package:bank_app/widgets/Themes.dart';
+import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../../Constant/Themes.dart';
-import '../../Model/receiverDetails.dart';
+
 
 class ShowDialog extends StatelessWidget {
   const ShowDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var textstyle = textStyle.copyWith(
-        fontSize: 20.sp, color: const Color.fromRGBO(31, 0, 17, 1));
+    var getTextStyle = textStyle.copyWith(
+        fontSize: 20.sp, color: deepPurpleColor);
     return AlertDialog(
       title: FittedBox(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: 10.h),
-            Icon(Icons.gpp_good_outlined, color: Colors.green, size: 41.sp),
+            Icon(Icons.gpp_good_outlined, color: grayColor, size: 41.sp),
             SizedBox(height: 5.h),
             Text("Transfer Successful!",
                 style: textStyle.copyWith(
-                    fontSize: 23.sp, color: const Color.fromRGBO(31, 0, 17, 1))),
+                    fontSize: 23.sp, color: deepPurpleColor)),
           ],
         ),
       ),
@@ -42,19 +43,18 @@ class ShowDialog extends StatelessWidget {
               SizedBox(height: 3.h),
               Text(
                 'Have been sent to $receiverName',
-                style: textstyle.copyWith(),
+                style: getTextStyle.copyWith(),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 5.h),
               Consumer<Date>(builder: (context, model, child) {
                 var date = model.date;
                 return Text("Date  $date",
-                    style: textstyle.copyWith(
+                    style: getTextStyle.copyWith(
                       fontSize: 18.sp,
                       decoration: TextDecoration.underline,
                       decorationThickness: 5.sp,
                       decorationStyle: TextDecorationStyle.wavy,
-                      
                     ));
               })
             ],

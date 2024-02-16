@@ -1,9 +1,10 @@
-import 'package:clickable_list_wheel_view/clickable_list_wheel_widget.dart';
+import '../../../Storage/person.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:bank_app/widgets/Themes.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import '../../../Constant/Themes.dart';
-import '../../../Storage/person.dart';
+import 'package:clickable_list_wheel_view/clickable_list_wheel_widget.dart';
+
 
 class HomeTransactionHistory extends StatelessWidget {
   HomeTransactionHistory({Key? key}) : super(key: key);
@@ -14,16 +15,9 @@ class HomeTransactionHistory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final reCeiverstorage = Hive.box<ReceiverStorage>('receiverBox');
-    bool checkForData = reCeiverstorage.isNotEmpty; // Check if there's any data
+    final reCeiverStorage = Hive.box<ReceiverStorage>('receiverBox');
+    bool checkForData = reCeiverStorage.isNotEmpty; // Check if there's any data
 
-    void addItem(ReceiverStorage newItem) {
-      if (reCeiverstorage.length >= 4) {
-        reCeiverstorage.deleteAt(
-            0); // Remove the oldest item to maintain the length of 4 items
-      }
-      reCeiverstorage.add(newItem); // Add the new item
-    }
 
     return Expanded(
         child: Column(
@@ -34,7 +28,7 @@ class HomeTransactionHistory extends StatelessWidget {
               scrollController: _scrollController,
               itemHeight: _itemHeight,
               itemCount:
-                  reCeiverstorage.length >= 4 ? 4 : reCeiverstorage.length,
+                  reCeiverStorage.length >= 4 ? 4 : reCeiverStorage.length,
               onItemTapCallback: (index) {
                 print("noItemTapCallback index: $index");
                 // Add your onTap logic here
@@ -51,9 +45,9 @@ class HomeTransactionHistory extends StatelessWidget {
                 },
                 childDelegate: ListWheelChildBuilderDelegate(
                   builder: (context, index) {
-                    final reversedIndex = reCeiverstorage.length - index - 1;
+                    final reversedIndex = reCeiverStorage.length - index - 1;
                     final receiver =
-                        reCeiverstorage.getAt(reversedIndex) as ReceiverStorage;
+                        reCeiverStorage.getAt(reversedIndex) as ReceiverStorage;
 
                     return Padding(
                       padding: EdgeInsets.only(bottom: 2.h),
@@ -71,7 +65,7 @@ class HomeTransactionHistory extends StatelessWidget {
                           subtitle: Text(
                             "\u20A6${receiver.receiverAmount1}",
                             style: TextStyle(
-                              color: backgroundColor,
+                              color: appBackgroundColor,
                               fontSize: 17.sp,
                             ),
                           ),
@@ -88,7 +82,7 @@ class HomeTransactionHistory extends StatelessWidget {
                               Align(
                                 alignment: Alignment.topRight,
                                 child: Icon(Icons.arrow_outward,
-                                    size: 22.sp, color: Colors.green),
+                                    size: 22.sp, color: whiteColor),
                               ),
                             ],
                           ),
@@ -97,7 +91,7 @@ class HomeTransactionHistory extends StatelessWidget {
                     );
                   },
                   childCount:
-                      reCeiverstorage.length >= 4 ? 4 : reCeiverstorage.length,
+                      reCeiverStorage.length >= 4 ? 4 : reCeiverStorage.length,
                 ),
               ),
             ),
@@ -111,11 +105,11 @@ class HomeTransactionHistory extends StatelessWidget {
                     child: Column(
                   children: [
                     Icon(Icons.cancel_outlined,
-                        color: backgroundColor, size: 35.sp),
+                        color: appBackgroundColor, size: 35.sp),
                     FittedBox(
                       child: Text("No transactions were made.",
                           style: textStyle.copyWith(
-                              fontSize: 25.sp, color: backgroundColor)),
+                              fontSize: 25.sp, color: appBackgroundColor)),
                     )
                   ],
                 )),

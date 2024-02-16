@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import '../screens/dashBoard/dashBoard.dart';
+import 'package:bank_app/widgets/Themes.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../Screen/dashBoard.dart';
+
 
 class LoadDasboard extends StatefulWidget {
   const LoadDasboard({super.key});
@@ -27,12 +29,12 @@ class _LoadDasboardState extends State<LoadDasboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: const Color.fromRGBO(101, 0, 56, 1.0),
+        color: appBackgroundColor,
         width: double.infinity,
         height: double.infinity,
         child: Center(
           child: SpinKitWaveSpinner(
-            color: Colors.white,
+            color: whiteColor,
             size: 45.sp,
           ),
         ),
